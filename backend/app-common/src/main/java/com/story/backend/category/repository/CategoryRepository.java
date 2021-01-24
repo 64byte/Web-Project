@@ -1,2 +1,2 @@
-package com.story.backend.category.repository;public class Repository {
+package com.story.backend.category.repository;public class CategoryRepository {
 }

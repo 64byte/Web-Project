@@ -1,5 +1,5 @@
 rootProject.name = 'backend'
 
+include 'app-common'
 include 'app-external-api'
-include 'app-batch'
 

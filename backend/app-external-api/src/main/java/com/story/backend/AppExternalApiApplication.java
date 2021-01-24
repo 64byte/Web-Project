@@ -1,4 +1,4 @@
-package com.story;
+package com.story.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AppExternalApiApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(BackendApplication.class, args);
+        SpringApplication.run(AppExternalApiApplication.class, args);
     }
 
 }

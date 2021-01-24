@@ -1,2 +1,4 @@
-package com.story.backend.user.repository;public class UserRepository {
+package com.story.backend.user.repository;
+
+public class UserRepository {
 }

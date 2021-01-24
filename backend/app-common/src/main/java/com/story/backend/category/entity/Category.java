@@ -1,2 +1,4 @@
-package com.story.backend.category.entity;public class Category {
+package com.story.backend.category.entity;
+
+public class Category {
 }
