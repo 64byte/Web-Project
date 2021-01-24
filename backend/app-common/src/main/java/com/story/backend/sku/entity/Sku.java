@@ -1,4 +1,5 @@
-package com.story.backend.category.entity;
+package com.story.backend.sku.entity;
+
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -14,18 +15,18 @@ import java.util.UUID;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(name = "category")
-public class Category {
+@Table(name = "sku")
+public class Sku {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
     private long id;
 
-    @Column(name = "category_id", length = 36, nullable = false, updatable = false, unique = true)
-    private final UUID categoryId = java.util.UUID.randomUUID();
+    @Column(name = "sku_id", length = 36, nullable = false, updatable = false, unique = true)
+    private final UUID skuId = java.util.UUID.randomUUID();
 
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "size", nullable = false)
+    private String size;
 
     @LastModifiedDate
     @Column(name = "updated_at")
@@ -36,7 +37,7 @@ public class Category {
     private LocalDateTime createdAt;
 
     @Builder
-    public Category(String name) {
-        this.name = name;
+    public Sku(String size) {
+        this.size = size;
     }
 }

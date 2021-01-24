@@ -14,15 +14,15 @@ import java.util.UUID;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(name = "category")
-public class Category {
+@Table(name = "product")
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
     private long id;
 
-    @Column(name = "category_id", length = 36, nullable = false, updatable = false, unique = true)
-    private final UUID categoryId = java.util.UUID.randomUUID();
+    @Column(name = "product_id", length = 36, nullable = false, updatable = false, unique = true)
+    private final UUID productId = java.util.UUID.randomUUID();
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -36,7 +36,7 @@ public class Category {
     private LocalDateTime createdAt;
 
     @Builder
-    public Category(String name) {
+    public Product(String name) {
         this.name = name;
     }
 }

@@ -1,4 +1,4 @@
-package com.story.backend.category.entity;
+package com.story.backend.color.entity;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -14,18 +14,21 @@ import java.util.UUID;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(name = "category")
-public class Category {
+@Table(name = "color")
+public class Color {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true)
     private long id;
 
-    @Column(name = "category_id", length = 36, nullable = false, updatable = false, unique = true)
-    private final UUID categoryId = java.util.UUID.randomUUID();
+    @Column(name = "color_id", length = 36, nullable = false, updatable = false, unique = true)
+    private final UUID colorId = java.util.UUID.randomUUID();
 
     @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "hex", nullable = false)
+    private byte[] hex;
 
     @LastModifiedDate
     @Column(name = "updated_at")
@@ -36,7 +39,8 @@ public class Category {
     private LocalDateTime createdAt;
 
     @Builder
-    public Category(String name) {
+    public Color(String name, byte[] hex) {
         this.name = name;
+        this.hex = hex;
     }
 }
