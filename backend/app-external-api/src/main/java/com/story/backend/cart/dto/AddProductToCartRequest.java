@@ -18,14 +18,14 @@ import java.util.UUID;
 @ToString
 public class AddProductToCartRequest {
 
-    @NotNull
-    UUID skuId;
-    
     @Nullable
-    UUID cartId;
+    private UUID cartId;
+
+    @NotNull
+    private UUID skuId;
 
     @Min(1)
-    long quantity;
+    private long quantity;
 
     public boolean isEmptyCartId() {
         return cartId == null;

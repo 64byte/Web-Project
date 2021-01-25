@@ -33,10 +33,10 @@ public class UserController {
         }
     }
 
-    @PostMapping("/carts/{cart_id}/products/{product_id}/skus/{sku_id}")
-    public ResponseEntity<Long> addToUserCart(@PathVariable UUID cartId, @PathVariable UUID productId, @PathVariable UUID skuId, @AuthenticationPrincipal UserPrincipal userPrincipal) {
+    @PostMapping("/carts/{cartId}")
+    public ResponseEntity<Long> addToUserCart(@PathVariable UUID cartId, @AuthenticationPrincipal UserPrincipal userPrincipal) {
 
-        System.out.println("cartId " + cartId + " productId: " + productId + " skuId: " + skuId + " userPrin: " + (User)(userPrincipal));
+        System.out.println("cartId " + cartId + " userPrin: " + (userPrincipal));
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

@@ -2,8 +2,11 @@ package com.story.backend;
 
 import com.story.backend.address.entity.Address;
 import com.story.backend.address.repository.AddressRepository;
-import com.story.backend.cart.entity.Cart;
 import com.story.backend.cart.repository.CartRepository;
+import com.story.backend.product.entity.Product;
+import com.story.backend.product.repository.ProductRepository;
+import com.story.backend.sku.entity.Sku;
+import com.story.backend.sku.repository.SkuRepository;
 import com.story.backend.user.entity.User;
 import com.story.backend.user.entity.UserAddress;
 import com.story.backend.user.repository.UserAddressRepository;
@@ -17,6 +20,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
+import java.util.Set;
 
 @EnableJpaAuditing
 @SpringBootApplication
@@ -40,6 +44,12 @@ class DemoCommandLineRunner implements CommandLineRunner {
     private final UserAddressRepository userAddressRepository;
 
     private final CartRepository cartRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
+
+    @Autowired
+    private SkuRepository skuRepository;
 
     public DemoCommandLineRunner(UserRepository userRepository, AddressRepository addressRepository, UserAddressRepository userAddressRepository, CartRepository cartRepository) {
         this.userRepository = userRepository;
@@ -86,7 +96,32 @@ class DemoCommandLineRunner implements CommandLineRunner {
 
 //        user.addUserAddress(userAddress);
 
-        System.out.println(userOptional.get().getUserAddresses().isEmpty());
+        Product product = new Product("test Prod");
+
+        productRepository.save(product);
+
+        Sku sku = new Sku(product,"260", 7);
+        Sku sku2 = new Sku(product, "265", 8);
+        skuRepository.save(sku);
+        skuRepository.save(sku2);
+
+
+        product.addSku(sku);
+        product.addSku(sku2);
+
+//        productSkuRepository.save(new ProductSku(product, sku));
+  //      productSkuRepository.save(new ProductSku(product, sku2));
+
+
+        Set<UserAddress> userAddressSet = userOptional.get().getUserAddresses();
+
+        System.out.println(userAddressSet.stream().findFirst().get().getAddress().getReceiverName());
+
+        System.out.println(product.getSkus().isEmpty());
+
+        product.getSkus().forEach((s) -> {
+            System.out.println(s.getId() + ", " + s.getSkuId() + ", " + s.getProduct().getProductId());
+        });
     }
 
 }
