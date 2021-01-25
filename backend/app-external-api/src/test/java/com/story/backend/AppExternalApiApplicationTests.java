@@ -1,4 +1,4 @@
-package com.story;
+package com.story.backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

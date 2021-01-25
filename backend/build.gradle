@@ -13,19 +13,17 @@ buildscript {
     }
 }
 
-subprojects  {
+allprojects {
     group 'com.story'
     version '0.0.1-SNAPSHOT'
+}
 
+subprojects  {
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
 
-/*    plugins {
-        id 'org.springframework.boot' version '2.4.2'
-        id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-        id 'java'
-    } */
+    sourceCompatibility = 11
 
     repositories {
         mavenCentral()
@@ -36,14 +34,14 @@ subprojects  {
     }
 }
 
-project(':app-batch') {
+project(':app-external-api') {
     dependencies {
-        compile project(':app-batch')
+        compile project(':app-common')
     }
 }
 
-project(':app-external-api') {
+project(':app-internal-api') {
     dependencies {
-        compile project(':app-external-api')
+        compile project(':app-common')
     }
 }

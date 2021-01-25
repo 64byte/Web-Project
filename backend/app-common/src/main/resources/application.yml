@@ -1,0 +1,16 @@
+spring:
+  flyway:
+    enabled: false
+
+  datasource:
+    url: jdbc:postgresql://localhost:2345/jwt-demo
+    username: root
+    password: 1234
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+      dialect: org.hibernate.dialect.PostgreSQL95Dialect
+    generate-ddl: true
+    show-sql: true
+    database: POSTGRESQL
