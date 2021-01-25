@@ -1,6 +1,7 @@
 package com.story.backend.sku.entity;
 
 
+import com.story.backend.category.entity.Product;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,6 +25,10 @@ public class Sku {
 
     @Column(name = "sku_id", length = 36, nullable = false, updatable = false, unique = true)
     private final UUID skuId = java.util.UUID.randomUUID();
+
+    @OneToMany
+    @JoinColumn(name = "product_id")
+    private Product product;
 
     @Column(name = "size", nullable = false)
     private String size;
