@@ -1,5 +1,6 @@
 package com.story.backend.user.entity;
 
+import com.story.backend.address.entity.Address;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Indexed;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -32,6 +35,9 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private Set<UserAddress> userAddresses = new HashSet<>();
+
     @LastModifiedDate
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
@@ -45,5 +51,4 @@ public class User {
         this.email = email;
         this.password = password;
     }
-
 }
