@@ -1,2 +1,8 @@
-package com.story.backend.cart.controller;public class CartController {
+package com.story.backend.cart.controller;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class CartController {
+
 }

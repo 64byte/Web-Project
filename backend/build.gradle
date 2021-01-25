@@ -39,3 +39,9 @@ project(':app-external-api') {
         compile project(':app-common')
     }
 }
+
+project(':app-internal-api') {
+    dependencies {
+        compile project(':app-common')
+    }
+}

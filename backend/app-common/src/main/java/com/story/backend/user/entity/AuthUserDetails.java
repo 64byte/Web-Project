@@ -1,4 +1,4 @@
-package com.story.demo.user.entity;
+package com.story.backend.user.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
