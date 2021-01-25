@@ -1,10 +1,7 @@
 package com.story.backend.cart.entity;
 
 import com.story.backend.user.entity.User;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -24,7 +21,6 @@ public class Cart {
 
     @Column(name = "cart_id", length = 36, nullable = false, updatable = false, unique = true)
     private final UUID cartId = java.util.UUID.randomUUID();
-
 
     @Transient
     private long testAttr;

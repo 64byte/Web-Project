@@ -1,6 +1,5 @@
 package com.story.backend.sku.entity;
 
-
 import com.story.backend.category.entity.Product;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -26,12 +25,16 @@ public class Sku {
     @Column(name = "sku_id", length = 36, nullable = false, updatable = false, unique = true)
     private final UUID skuId = java.util.UUID.randomUUID();
 
-    @OneToMany
+    @Setter
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private Product product;
 
     @Column(name = "size", nullable = false)
     private String size;
+
+    @Column(name = "quantity", nullable = false)
+    private long quantity;
 
     @LastModifiedDate
     @Column(name = "updated_at")
@@ -42,7 +45,9 @@ public class Sku {
     private LocalDateTime createdAt;
 
     @Builder
-    public Sku(String size) {
+    public Sku(Product product, String size, long quantity) {
+        this.product = product;
         this.size = size;
+        this.quantity = quantity;
     }
 }

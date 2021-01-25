@@ -35,8 +35,8 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private Set<UserAddress> userAddresses = new HashSet<>();
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, orphanRemoval = true)
+    private final Set<UserAddress> userAddresses = new HashSet<>();
 
     @LastModifiedDate
     @Column(name = "updated_at")

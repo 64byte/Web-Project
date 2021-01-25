@@ -1,10 +1,7 @@
 package com.story.backend.user.entity;
 
 import com.story.backend.address.entity.Address;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
