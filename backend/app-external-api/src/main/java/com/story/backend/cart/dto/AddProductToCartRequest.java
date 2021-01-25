@@ -17,7 +17,7 @@ import java.util.UUID;
 @Setter
 @ToString
 public class AddProductToCartRequest {
-
+  
     @Nullable
     private UUID cartId;
 
