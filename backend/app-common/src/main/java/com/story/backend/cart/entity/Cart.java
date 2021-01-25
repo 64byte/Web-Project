@@ -1,5 +1,6 @@
 package com.story.backend.cart.entity;
 
+import com.story.backend.user.entity.User;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,6 +25,10 @@ public class Cart {
     @Column(name = "cart_id", length = 36, nullable = false, updatable = false, unique = true)
     private final UUID cartId = java.util.UUID.randomUUID();
 
+
+    @Transient
+    private long testAttr;
+
     @LastModifiedDate
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
@@ -31,4 +36,9 @@ public class Cart {
     @CreatedDate
     @Column(name = "created_at")
     private LocalDateTime createdAt;
+
+    @Builder
+    public Cart(long testAttr) {
+        this.testAttr = testAttr;
+    }
 }

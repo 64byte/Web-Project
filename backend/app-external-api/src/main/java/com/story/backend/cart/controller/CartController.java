@@ -1,8 +1,33 @@
 package com.story.backend.cart.controller;
 
-import org.springframework.web.bind.annotation.RestController;
+import com.story.backend.cart.dto.AddProductToCartRequest;
+import com.story.backend.cart.service.CartService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
+
+import java.nio.file.attribute.UserPrincipal;
+import java.util.UUID;
 
 @RestController
+@RequestMapping("/api/carts")
 public class CartController {
+
+    private final CartService cartService;
+
+    public CartController(CartService cartService) {
+        this.cartService = cartService;
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<Long> addToCart(@RequestBody AddProductToCartRequest addProductToCartRequest) {
+
+
+        cartService.addProductToCart(addProductToCartRequest);
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
+
+    }
 
 }

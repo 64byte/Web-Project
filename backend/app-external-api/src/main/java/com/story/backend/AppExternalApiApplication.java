@@ -2,6 +2,8 @@ package com.story.backend;
 
 import com.story.backend.address.entity.Address;
 import com.story.backend.address.repository.AddressRepository;
+import com.story.backend.cart.entity.Cart;
+import com.story.backend.cart.repository.CartRepository;
 import com.story.backend.user.entity.User;
 import com.story.backend.user.entity.UserAddress;
 import com.story.backend.user.repository.UserAddressRepository;
@@ -37,10 +39,13 @@ class DemoCommandLineRunner implements CommandLineRunner {
 
     private final UserAddressRepository userAddressRepository;
 
-    public DemoCommandLineRunner(UserRepository userRepository, AddressRepository addressRepository, UserAddressRepository userAddressRepository) {
+    private final CartRepository cartRepository;
+
+    public DemoCommandLineRunner(UserRepository userRepository, AddressRepository addressRepository, UserAddressRepository userAddressRepository, CartRepository cartRepository) {
         this.userRepository = userRepository;
         this.addressRepository = addressRepository;
         this.userAddressRepository = userAddressRepository;
+        this.cartRepository = cartRepository;
     }
 
     @Override
@@ -75,6 +80,9 @@ class DemoCommandLineRunner implements CommandLineRunner {
         userAddressRepository.save(userAddress);
 
         Optional<User> userOptional = userRepository.findByUserId(user.getUserId());
+
+//        cartRepository.save(Cart.builder().user(user)
+//                .build());
 
 //        user.addUserAddress(userAddress);
 
