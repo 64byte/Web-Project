@@ -36,7 +36,7 @@ public class User {
     private String password;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, orphanRemoval = true)
-    private final Set<UserAddress> userAddresses = new HashSet<>();
+    private final Set<Address> addresses = new HashSet<>();
 
     @LastModifiedDate
     @Column(name = "updated_at")
@@ -50,5 +50,10 @@ public class User {
     public User(String email, String password) {
         this.email = email;
         this.password = password;
+    }
+
+    public void addAddress(Address address) {
+        addresses.add(address);
+        address.setUser(this);
     }
 }

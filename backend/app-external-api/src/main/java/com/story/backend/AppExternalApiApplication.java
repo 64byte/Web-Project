@@ -5,11 +5,9 @@ import com.story.backend.address.repository.AddressRepository;
 import com.story.backend.cart.repository.CartRepository;
 import com.story.backend.product.entity.Product;
 import com.story.backend.product.repository.ProductRepository;
-import com.story.backend.sku.entity.Sku;
-import com.story.backend.sku.repository.SkuRepository;
+import com.story.backend.product.entity.ProductSku;
+import com.story.backend.product.repository.ProductSkuRepository;
 import com.story.backend.user.entity.User;
-import com.story.backend.user.entity.UserAddress;
-import com.story.backend.user.repository.UserAddressRepository;
 import com.story.backend.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -20,7 +18,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
-import java.util.Set;
 
 @EnableJpaAuditing
 @SpringBootApplication
@@ -41,20 +38,17 @@ class DemoCommandLineRunner implements CommandLineRunner {
 
     private final AddressRepository addressRepository;
 
-    private final UserAddressRepository userAddressRepository;
-
     private final CartRepository cartRepository;
 
     @Autowired
     private ProductRepository productRepository;
 
     @Autowired
-    private SkuRepository skuRepository;
+    private ProductSkuRepository skuRepository;
 
-    public DemoCommandLineRunner(UserRepository userRepository, AddressRepository addressRepository, UserAddressRepository userAddressRepository, CartRepository cartRepository) {
+    public DemoCommandLineRunner(UserRepository userRepository, AddressRepository addressRepository, CartRepository cartRepository) {
         this.userRepository = userRepository;
         this.addressRepository = addressRepository;
-        this.userAddressRepository = userAddressRepository;
         this.cartRepository = cartRepository;
     }
 
@@ -72,7 +66,9 @@ class DemoCommandLineRunner implements CommandLineRunner {
                 .receiverPhoneNum("01012341234")
                 .postalCode("01234")
                 .address1("dfaefasefff")
-                .address2("ererawerafasdfa").build();
+                .address2("ererawerafasdfa")
+                .user(user)
+                .build();
 
         addressRepository.save(address);
 
@@ -81,13 +77,15 @@ class DemoCommandLineRunner implements CommandLineRunner {
                 .receiverPhoneNum("01012341234")
                 .postalCode("01234")
                 .address1("dfaefasefff")
-                .address2("ererawerafasdfa").build();
+                .address2("ererawerafasdfa")
+                .user(user)
+                .build();
 
         addressRepository.save(address2);
 
-        UserAddress userAddress  =new UserAddress("asdfasdf", user, address2);
+        user.addAddress(address);
+        user.addAddress(address2);
 
-        userAddressRepository.save(userAddress);
 
         Optional<User> userOptional = userRepository.findByUserId(user.getUserId());
 
@@ -100,8 +98,8 @@ class DemoCommandLineRunner implements CommandLineRunner {
 
         productRepository.save(product);
 
-        Sku sku = new Sku(product,"260", 7);
-        Sku sku2 = new Sku(product, "265", 8);
+        ProductSku sku = new ProductSku(product,"260", 7);
+        ProductSku sku2 = new ProductSku(product, "265", 8);
         skuRepository.save(sku);
         skuRepository.save(sku2);
 
@@ -113,9 +111,10 @@ class DemoCommandLineRunner implements CommandLineRunner {
   //      productSkuRepository.save(new ProductSku(product, sku2));
 
 
-        Set<UserAddress> userAddressSet = userOptional.get().getUserAddresses();
 
-        System.out.println(userAddressSet.stream().findFirst().get().getAddress().getReceiverName());
+        user.getAddresses().forEach((addr) -> {
+            System.out.println(addr.getAddressId());
+        });
 
         System.out.println(product.getSkus().isEmpty());
 
