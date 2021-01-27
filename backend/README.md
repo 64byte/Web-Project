@@ -76,6 +76,9 @@
 
 - 도메인 중심 디렉토리 구성
 
+  > domain을 공통 모듈로 두고(entity, repository) 그 외에 여러 모듈(실행되는 모듈, controller, dto, service)로 나눠서 정리함   
+  > 외부에서 호출하는 api 서비스와 내부에서(예를 들면 백오피스) 호출하는 api 서비스가 다르다고 판단함. 단점으로는 각 서비스에서 중복 코드가 발생함.
+
 - controller <-> service간 데이터 전송은 dto 클래스를 이용
 
   > controller -> service는 request dto, service -> controller는 response dto
