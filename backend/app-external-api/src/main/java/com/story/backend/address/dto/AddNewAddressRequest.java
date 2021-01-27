@@ -29,7 +29,7 @@ public class AddNewAddressRequest {
     private String address2;
 
     public Address toEntity() {
-        return new Address(receiverName, receiverPhoneNum, postalCode, address1, address2);
+        return new Address(receiverName, receiverPhoneNum, postalCode, address1, address2, null);
     }
 
 }

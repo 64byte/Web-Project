@@ -1,7 +1,6 @@
 package com.story.backend.user.controller;
 
 import com.story.backend.user.dto.UserRegistrationRequest;
-import com.story.backend.user.entity.User;
 import com.story.backend.user.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

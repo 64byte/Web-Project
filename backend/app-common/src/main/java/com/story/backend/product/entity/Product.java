@@ -1,6 +1,5 @@
 package com.story.backend.product.entity;
 
-import com.story.backend.sku.entity.Sku;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -28,7 +27,7 @@ public class Product {
     private String name;
 
     @OneToMany(mappedBy = "product", orphanRemoval = true)
-    private final Set<Sku> skus = new HashSet<>();
+    private final Set<ProductSku> skus = new HashSet<>();
 
     @LastModifiedDate
     @Column(name = "updated_at")
@@ -43,8 +42,8 @@ public class Product {
         this.name = name;
     }
 
-    public void addSku(Sku sku) {
-        skus.add(sku);
-        sku.setProduct(this);
+    public void addSku(ProductSku productSku) {
+        skus.add(productSku);
+        productSku.setProduct(this);
     }
 }

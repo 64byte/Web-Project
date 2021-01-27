@@ -2,6 +2,7 @@ package com.story.backend.cart.controller;
 
 import com.story.backend.cart.dto.AddProductToCartRequest;
 import com.story.backend.cart.service.CartService;
+import com.story.backend.user.entity.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -21,10 +22,10 @@ public class CartController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Long> addToCart(@RequestBody AddProductToCartRequest addProductToCartRequest) {
+    public ResponseEntity<Long> addToCart(@RequestBody AddProductToCartRequest addProductToCartRequest, @AuthenticationPrincipal UserPrincipal userPrincipal) {
+//        User user = (User)userPrincipal;
 
-
-        cartService.addProductToCart(addProductToCartRequest);
+        cartService.addProductToCart(addProductToCartRequest, userPrincipal);
 
         return new ResponseEntity<>(HttpStatus.CREATED);
 
