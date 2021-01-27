@@ -1,6 +1,7 @@
 package com.story.backend.address.controller;
 
 import com.story.backend.address.dto.AddressRequest;
+import com.story.backend.address.dto.UpdateAddressRequest;
 import com.story.backend.address.service.AddressService;
 import com.story.backend.common.dto.CommonResponse;
 import org.springframework.data.domain.Pageable;
@@ -32,8 +33,14 @@ public class AddressController {
                 CommonResponse.of(HttpStatus.CREATED, null, addressService.addNewAddress(addressRequest)), HttpStatus.CREATED);
     }
 
-    @DeleteMapping
-    public ResponseEntity<CommonResponse> removeAddress(@RequestBody UUID addressId) {
+    @PutMapping("/{addressId}")
+    public ResponseEntity<CommonResponse> updateAddress(@PathVariable UUID addressId, @RequestBody UpdateAddressRequest updateAddressRequest) {
+        return new ResponseEntity<>(
+                CommonResponse.of(HttpStatus.OK, null, addressService.updateAddress(addressId, updateAddressRequest)), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{addressId}}")
+    public ResponseEntity<CommonResponse> removeAddress(@PathVariable UUID addressId) {
         return new ResponseEntity<>(
                 CommonResponse.of(HttpStatus.OK, null, addressService.removeAddress(addressId)), HttpStatus.OK);
     }

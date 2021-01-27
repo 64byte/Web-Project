@@ -7,12 +7,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 
+import java.io.Serializable;
+
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class CommonResponse {
+public class CommonResponse implements Serializable {
+
+    private static final long serialVersionUID = 2658366165404364587L;
 
     private HttpStatus status;
+
     private String code;
+
     private Object result;
 
     @Builder

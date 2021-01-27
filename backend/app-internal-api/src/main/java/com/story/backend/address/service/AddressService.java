@@ -2,6 +2,8 @@ package com.story.backend.address.service;
 
 import com.story.backend.address.dto.AddressRequest;
 import com.story.backend.address.dto.AddressResponse;
+import com.story.backend.address.dto.UpdateAddressRequest;
+import com.story.backend.address.entity.Address;
 import com.story.backend.address.repository.AddressRepository;
 import com.story.backend.user.service.UserService;
 import org.springframework.data.domain.Page;
@@ -48,6 +50,24 @@ public class AddressService {
                 .getAddressId();
     }
 
+    /**
+     *
+     * @param addressId
+     * @param updateAddressRequest
+     * @return
+     */
+    public UUID updateAddress(@Valid UUID addressId, @Valid UpdateAddressRequest updateAddressRequest) {
+
+        Address address = addressRepository.findByAddressId(addressId).get();
+
+        return null;
+    }
+
+    /**
+     *
+     * @param addressId
+     * @return
+     */
     @Valid
     public boolean removeAddress(@NotNull UUID addressId) {
         addressRepository.deleteByAddressId(addressId);
