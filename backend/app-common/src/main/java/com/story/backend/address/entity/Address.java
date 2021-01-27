@@ -38,6 +38,7 @@ public class Address {
     @Column(name = "address2", nullable = false)
     private String address2;
 
+    @Setter
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")

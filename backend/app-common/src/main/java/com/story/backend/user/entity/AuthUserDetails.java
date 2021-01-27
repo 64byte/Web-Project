@@ -14,7 +14,6 @@ import java.util.Collections;
 
 @Getter
 @Setter
-@AllArgsConstructor
 public class AuthUserDetails implements UserDetails {
 
     private static final long serialVersionUID = 5287437030838146074L;
@@ -23,6 +22,12 @@ public class AuthUserDetails implements UserDetails {
     private User user;
 
     private String token;
+
+    public AuthUserDetails(User user, String token) {
+        super();
+        this.user = user;
+        this.token = token;
+    }
 
     public static AuthUserDetails of(User user, String token) {
         return new AuthUserDetails(user, token);

@@ -18,7 +18,6 @@ import java.time.LocalDateTime;
 @Component
 public class JwtProvider {
 
-    @Value("{")
     private static final String secret = "fd4db9644040cb8231cf7fb727a7ff23a85b985da450c0c840976127c9c0adfe0ef9a4f7e88ce7a1585dd59cf78f0ea57535d6b1cd744c1ee62d726572f51432";
 
     private static final Key secretKey = Keys.hmacShaKeyFor(secret.getBytes());
