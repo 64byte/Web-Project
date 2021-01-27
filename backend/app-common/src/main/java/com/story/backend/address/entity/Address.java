@@ -1,5 +1,6 @@
 package com.story.backend.address.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.story.backend.user.entity.User;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -37,9 +38,9 @@ public class Address {
     @Column(name = "address2", nullable = false)
     private String address2;
 
-    @Setter
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     @LastModifiedDate
@@ -58,5 +59,10 @@ public class Address {
         this.address1 = address1;
         this.address2 = address2;
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "address ";
     }
 }
