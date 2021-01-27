@@ -1,5 +1,6 @@
 package com.story.backend.user.controller;
 
+import com.story.backend.common.dto.CommonResponse;
 import com.story.backend.user.dto.UserRegistrationRequest;
 import com.story.backend.user.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -21,15 +22,8 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<Long> registerUser(@RequestBody UserRegistrationRequest userRegistrationRequest) {
-        try {
-            userService.registerUser(userRegistrationRequest);
-
-            return new ResponseEntity<>(HttpStatus.CREATED);
-        }
-        catch (Exception ex) {
-            return new ResponseEntity<Long>(HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<CommonResponse> registerUser(@RequestBody UserRegistrationRequest userRegistrationRequest) {
+        return new ResponseEntity<>(CommonResponse.of(HttpStatus.CREATED.value(), null, userService.registerUser(userRegistrationRequest)), HttpStatus.CREATED);
     }
 
     @PostMapping("/carts/{cartId}")

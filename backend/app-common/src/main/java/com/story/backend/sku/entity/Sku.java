@@ -1,10 +1,7 @@
 package com.story.backend.sku.entity;
 
-import com.story.backend.category.entity.Product;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.story.backend.product.entity.Product;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 

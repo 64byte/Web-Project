@@ -3,6 +3,7 @@ package com.story.backend.authentication.controller;
 import com.story.backend.authentication.dto.AuthRequest;
 import com.story.backend.authentication.dto.AuthResponse;
 import com.story.backend.authentication.service.AuthTokenService;
+import com.story.backend.common.dto.CommonResponse;
 import com.story.backend.user.controller.UserController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,32 +19,16 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    private final AuthenticationManager authenticationManager;
-
-    private final UserController userController;
-
     private final AuthTokenService authTokenService;
 
-    public AuthController(AuthenticationManager authenticationManager, UserController userController, AuthTokenService authTokenService) {
-        this.authenticationManager = authenticationManager;
-        this.userController = userController;
+    public AuthController(AuthTokenService authTokenService) {
         this.authTokenService = authTokenService;
     }
 
     @PostMapping
-    public @ResponseBody
-    ResponseEntity<AuthResponse> authUser(@RequestBody AuthRequest authRequest) {
-
-        try {
-            String email = authRequest.getEmail();
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, authRequest.getPassword()));
-
-            String token = authTokenService.issueToken(email);
-
-            return new ResponseEntity<>(AuthResponse.of(token), HttpStatus.CREATED);
-        } catch (AuthenticationException ae) {
-            throw new BadCredentialsException("");
-        }
+    public ResponseEntity<CommonResponse> authUserAndGetToken(@RequestBody AuthRequest authRequest) {
+        return new ResponseEntity<>(
+                CommonResponse.of(HttpStatus.CREATED.value(), null, authTokenService.authAndIssueToken(authRequest)), HttpStatus.CREATED);
     }
 
 }

@@ -2,6 +2,7 @@ package com.story.backend.user.dto;
 
 import lombok.Getter;
 import com.story.backend.user.entity.User;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.Email;
@@ -18,8 +19,8 @@ public class UserRegistrationRequest {
     @NotBlank
     private String password;
 
-    public void encodePassword(String password) {
-        this.password = password;
+    public void encodePassword(PasswordEncoder passwordEncoder) {
+        this.password = passwordEncoder.encode(password);
     }
 
     public User toEntity() {
