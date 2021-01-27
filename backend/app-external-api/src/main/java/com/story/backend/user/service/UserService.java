@@ -7,12 +7,12 @@ import com.story.backend.user.entity.User;
 import com.story.backend.user.exception.AlreadyRegisteredUserException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
+import com.story.backend.user.exception.AlreadyRegisteredUserException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.story.backend.user.dto.UserRegistrationRequest;
 import com.story.backend.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.validation.Valid;
