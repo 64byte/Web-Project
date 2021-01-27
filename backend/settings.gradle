@@ -3,4 +3,5 @@ rootProject.name = 'backend'
 include 'app-common'
 include 'app-external-api'
 include 'app-internal-api'
+include 'app-mail-server'
 
