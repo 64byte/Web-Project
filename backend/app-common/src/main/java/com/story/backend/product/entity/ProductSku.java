@@ -22,7 +22,7 @@ public class ProductSku {
     private final UUID skuId = java.util.UUID.randomUUID();
 
     @Setter
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
     private Product product;
 

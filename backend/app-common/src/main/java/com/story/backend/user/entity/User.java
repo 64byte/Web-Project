@@ -37,7 +37,7 @@ public class User {
     private String password;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private final Set<Address> addresses = new HashSet<>();
 
     @LastModifiedDate
@@ -56,5 +56,10 @@ public class User {
 
     public void addAddress(Address address) {
         addresses.add(address);
+        address.setUser(this);
+    }
+
+    public boolean isEqualOfUserId(UUID userid) {
+        return this.userId.equals(userid);
     }
 }

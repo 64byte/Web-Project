@@ -1,15 +1,18 @@
 package com.story.backend.authentication.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 @Getter
-@Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AuthRequest {
 
+    @Email
     private String email;
 
+    @NotBlank
     private String password;
 
     @Builder

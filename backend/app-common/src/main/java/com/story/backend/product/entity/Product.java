@@ -26,6 +26,12 @@ public class Product {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "style_code", nullable = false)
+    private String styleCode;
+
+    @Column(name = "description", nullable = false)
+    private String description;
+
     @OneToMany(mappedBy = "product", orphanRemoval = true)
     private final Set<ProductSku> skus = new HashSet<>();
 
@@ -38,11 +44,13 @@ public class Product {
     private LocalDateTime createdAt;
 
     @Builder
-    public Product(String name) {
+    public Product(String name, String styleCode, String description) {
         this.name = name;
+        this.styleCode = styleCode;
+        this.description = description;
     }
 
-    public void addSku(ProductSku productSku) {
+    public void addProductSku(ProductSku productSku) {
         skus.add(productSku);
         productSku.setProduct(this);
     }

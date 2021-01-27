@@ -13,8 +13,11 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
       dialect: org.hibernate.dialect.PostgreSQL95Dialect
+    properties:
+        hibernate.format_sql: true
     generate-ddl: true
     show-sql: true
+
     database: POSTGRESQL

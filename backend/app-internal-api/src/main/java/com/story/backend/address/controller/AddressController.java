@@ -24,24 +24,24 @@ public class AddressController {
     @GetMapping
     public ResponseEntity<CommonResponse> getAllAddress(Pageable pageable) {
         return new ResponseEntity<>
-                (CommonResponse.of(HttpStatus.OK, null, addressService.getAllAddresses(pageable)), HttpStatus.OK);
+                (CommonResponse.of(HttpStatus.OK.value(), null, addressService.getAllAddresses(pageable)), HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<CommonResponse> addNewAddress(@RequestBody AddressRequest addressRequest) {
         return new ResponseEntity<>(
-                CommonResponse.of(HttpStatus.CREATED, null, addressService.addNewAddress(addressRequest)), HttpStatus.CREATED);
+                CommonResponse.of(HttpStatus.OK.value(), null, addressService.addNewAddress(addressRequest)), HttpStatus.CREATED);
     }
 
     @PutMapping("/{addressId}")
     public ResponseEntity<CommonResponse> updateAddress(@PathVariable UUID addressId, @RequestBody UpdateAddressRequest updateAddressRequest) {
         return new ResponseEntity<>(
-                CommonResponse.of(HttpStatus.OK, null, addressService.updateAddress(addressId, updateAddressRequest)), HttpStatus.OK);
+                CommonResponse.of(HttpStatus.OK.value(), null, addressService.updateAddress(addressId, updateAddressRequest)), HttpStatus.OK);
     }
 
     @DeleteMapping("/{addressId}}")
     public ResponseEntity<CommonResponse> removeAddress(@PathVariable UUID addressId) {
         return new ResponseEntity<>(
-                CommonResponse.of(HttpStatus.OK, null, addressService.removeAddress(addressId)), HttpStatus.OK);
+                CommonResponse.of(HttpStatus.OK.value(), null, addressService.removeAddress(addressId)), HttpStatus.OK);
     }
 }
