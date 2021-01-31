@@ -29,6 +29,10 @@ public class Cart {
     @JoinColumn(name = "user_id")
     private User user;
 
+    private long totalQuantity;
+
+    private long totalPrice;
+
     @LastModifiedDate
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;

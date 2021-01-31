@@ -93,7 +93,7 @@ class DemoCommandLineRunner implements CommandLineRunner {
 
 //        user.addUserAddress(userAddress);
 
-        Product product = new Product("test Prod");
+        Product product = new Product("test Prod", "sadfasdf");
 
         productRepository.save(product);
 
@@ -103,8 +103,8 @@ class DemoCommandLineRunner implements CommandLineRunner {
         skuRepository.save(sku2);
 
 
-        product.addSku(sku);
-        product.addSku(sku2);
+        product.addProductSku(sku);
+        product.addProductSku(sku2);
 
 //        productSkuRepository.save(new ProductSku(product, sku));
         //      productSkuRepository.save(new ProductSku(product, sku2));

@@ -36,6 +36,12 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Column(name = "full_name", length = 255, nullable = false)
+    private String fullName;
+
+    @Column(name = "phone_num", length = 15, nullable = false)
+    private String phoneNum;
+
     @JsonManagedReference
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private final Set<Address> addresses = new HashSet<>();
@@ -49,9 +55,11 @@ public class User {
     private LocalDateTime createdAt;
 
     @Builder
-    public User(String email, String password) {
+    public User(String email, String password, String fullName, String phoneNum) {
         this.email = email;
         this.password = password;
+        this.fullName = fullName;
+        this.phoneNum = phoneNum;
     }
 
     public void addAddress(Address address) {

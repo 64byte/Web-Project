@@ -1,7 +1,7 @@
 package com.story.backend.common.exception;
 
 public enum ErrorCode {
-    METHOD_NOT_ALLOWED(405, "C002", " Invalid Input Value"),
+    METHOD_NOT_ALLOWED(405, "E002", " Invalid Input Value"),
 
     ;
 
