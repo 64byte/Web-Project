@@ -17,6 +17,7 @@
 - lombok
 - postgresql
 - jjwt
+- ~~spring kafka (적용중)~~
 
 
 
@@ -59,7 +60,10 @@
   - [authentication](https://github.com/64byte/Web-Project/tree/main/backend/app-inetnal-api/src/main/java/com/story/backend/authentication/)
   
 
-- app-batch
+- app-mail-server (작성중)
+  ~~메세지 브로커~~ 로부터 메세지를 받아온 후에 처리하는 메일 전송 서버 (가입 완료 및 주문 완료)
+
+- app-batch (작성중)
   배치 서비스 패키지
 
   
