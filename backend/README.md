@@ -77,7 +77,7 @@
 - authentication
 
 ## Database
-- [SCHEME](https://github.com/64byte/Web-Project/tree/main/backend\app-common\src\main\resources\db\migration)
+- [SCHEME](https://github.com/64byte/Web-Project/tree/main/backend/app-common/src/main/resources/db/migration)
 - 각 테이블은 phantom id (auto increment, 이하 id)와 UUID를 가진다.
   - id는 내부 로직에서 사용하는 PK, UUID는 외부에서 사용하는 PK이다. (N:M 병합 테이블의 경우에는 주로 다른 컨트롤러 혹은 서비스에 의해 접근하므로 id만 가진다)
 - 테이블 내용
@@ -117,7 +117,7 @@
 
 - controller <-> service간 데이터 전송은 dto 클래스를 이용
 
-  > controller -> service는 request dto, service -> controller는 response dto
+  > controller -> service는 request dto, service -> controller는 response dto (외부로 부터 전달받는 데이터에 대한 검증 및 내부로 반환되는 데이터 보호)
 
 - validation은 service method에서 하도록 함.
 
@@ -134,4 +134,5 @@
 - Controller 예외는 한 곳에서 처리한다. (해당 아이디어는 [여기](https://github.com/cheese10yun/spring-guide/blob/master/docs/exception-guide.md) 를 참고했음)
   - app-external-api
     - [GlobalExceptionHandler](https://github.com/64byte/Web-Project/blob/main/backend/app-external-api/src/main/java/com/story/backend/common/handler/GlobalExceptionHandler.java)
+
   
