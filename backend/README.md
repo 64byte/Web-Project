@@ -18,6 +18,7 @@
 - postgresql
 - jjwt
 - ~~spring kafka (적용중)~~
+- ~~flyway migration (적용중)~~
 
 
 
