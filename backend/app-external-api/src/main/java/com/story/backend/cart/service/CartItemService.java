@@ -7,6 +7,10 @@ import com.story.backend.product.entity.ProductSku;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -18,8 +22,12 @@ public class CartItemService {
         this.cartItemRepository = cartItemRepository;
     }
 
+    public List<CartItem> getCartItemById(@Valid @NotNull Cart cart) {
+        return cartItemRepository.findCartItemsByCartId(cart.getId());
+    }
+
     @Transactional
-    public boolean updateCartItem(Cart cart, ProductSku productsku, long quantity) {
+    public boolean updateCartItem(@Valid @NotNull Cart cart, @Valid @NotNull ProductSku productsku, @Valid @Min(1) long quantity) {
 
         CartItem cartItem = cartItemRepository.findByCartIdAndProductSkuId(cart.getId(), productsku.getId())
                 .orElseGet(() -> new CartItem(cart, productsku, 0));

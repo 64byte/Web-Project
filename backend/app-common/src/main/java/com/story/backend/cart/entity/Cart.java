@@ -1,7 +1,9 @@
 package com.story.backend.cart.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.story.backend.user.entity.User;
 import lombok.*;
+import org.hibernate.annotations.Formula;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -12,7 +14,7 @@ import java.util.Set;
 import java.util.UUID;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+//@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "cart")
 public class Cart {
@@ -24,10 +26,14 @@ public class Cart {
     @Column(name = "cart_id", length = 36, nullable = false, updatable = false, unique = true)
     private final UUID cartId = java.util.UUID.randomUUID();
 
-    @Setter
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
+    @Formula("(select sum(ci.quantity) from cart_item ci where ci.cart_id = id)")
+    private long totalQuantity;
+//
+//    private long totalPrice;
 
     @LastModifiedDate
     @Column(name = "updated_at")
@@ -37,13 +43,13 @@ public class Cart {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @OneToMany(mappedBy = "cart")
+    @JsonManagedReference
+    @OneToMany(mappedBy = "cart", fetch = FetchType.EAGER)
     private final Set<CartItem> cartItems = new HashSet<>();
 
     @Builder
-    public Cart(User user) {
-        this.user = user;
-    }
+    public Cart() {
 
+    }
 
 }

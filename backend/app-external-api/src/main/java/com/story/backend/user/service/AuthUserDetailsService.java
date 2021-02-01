@@ -19,6 +19,12 @@ public class AuthUserDetailsService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
+    /**
+     *
+     * @param email
+     * @return
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return userRepository.findByEmail(email).map(user -> AuthUserDetails.of(user, "")).orElseThrow(() -> new UsernameNotFoundException(""));

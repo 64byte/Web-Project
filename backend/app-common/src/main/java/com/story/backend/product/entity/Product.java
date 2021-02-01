@@ -1,5 +1,6 @@
 package com.story.backend.product.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -32,8 +33,15 @@ public class Product {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @OneToMany(mappedBy = "product", orphanRemoval = true)
-    private final Set<ProductSku> skus = new HashSet<>();
+    @Column(name = "price", nullable = false)
+    private long price;
+
+    @Column(name = "currency", nullable = false)
+    private String currency;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, orphanRemoval = true)
+    private final Set<ProductSku> productSkus = new HashSet<>();
 
     @LastModifiedDate
     @Column(name = "updated_at")
@@ -44,14 +52,16 @@ public class Product {
     private LocalDateTime createdAt;
 
     @Builder
-    public Product(String name, String styleCode, String description) {
+    public Product(String name, String styleCode, String description, long price, String currency) {
         this.name = name;
         this.styleCode = styleCode;
         this.description = description;
+        this.price = price;
+        this.currency = currency;
     }
 
     public void addProductSku(ProductSku productSku) {
-        skus.add(productSku);
+        productSkus.add(productSku);
         productSku.setProduct(this);
     }
 }
