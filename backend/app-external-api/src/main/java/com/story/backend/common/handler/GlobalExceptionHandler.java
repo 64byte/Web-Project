@@ -2,7 +2,6 @@ package com.story.backend.common.handler;
 
 import com.story.backend.authentication.exception.InvalidJwtAuthenticationException;
 import com.story.backend.common.dto.ErrorResponse;
-import com.story.backend.common.exception.ErrorCode;
 import com.story.backend.user.exception.AlreadyRegisteredUserException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -13,14 +12,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
-
-    /*
-    @ExceptionHandler(InvalidJwtAuthenticationException.class)
-    protected ResponseEntity<ErrorResponse> handleInvalidJwtAuthException(InvalidJwtAuthenticationException e) {
-        log.error("handleInvalidJwtAuthException", e);
-        return new ResponseEntity<>(ErrorResponse.builder().build(), HttpStatus.BAD_REQUEST);
-    }
-    */
 
     @ExceptionHandler(AlreadyRegisteredUserException.class)
     protected ResponseEntity<ErrorResponse> handleAlreadyRegisteredUserException(AlreadyRegisteredUserException e) {

@@ -29,6 +29,9 @@ public class Address {
     @Column(name = "receiver_phone_num", nullable = false)
     private String receiverPhoneNum;
 
+    @Column(name = "receiver_email", nullable = false)
+    private String receiverEmail;
+
     @Column(name = "postal_code", nullable = false)
     private String postalCode;
 
@@ -53,9 +56,10 @@ public class Address {
     private LocalDateTime createdAt;
 
     @Builder
-    public Address(String receiverName, String receiverPhoneNum, String postalCode, String address1, String address2, User user) {
+    public Address(String receiverName, String receiverPhoneNum, String receiverEmail, String postalCode, String address1, String address2, User user) {
         this.receiverName = receiverName;
         this.receiverPhoneNum = receiverPhoneNum;
+        this.receiverEmail = receiverEmail;
         this.postalCode = postalCode;
         this.address1 = address1;
         this.address2 = address2;

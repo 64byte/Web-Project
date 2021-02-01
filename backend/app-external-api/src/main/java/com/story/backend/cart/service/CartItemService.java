@@ -22,10 +22,22 @@ public class CartItemService {
         this.cartItemRepository = cartItemRepository;
     }
 
+    /**
+     * (내부 로직용) cart를 이용해 cart Item List를 가져온다
+     * @param cart
+     * @return
+     */
     public List<CartItem> getCartItemById(@Valid @NotNull Cart cart) {
         return cartItemRepository.findCartItemsByCartId(cart.getId());
     }
 
+    /**
+     *
+     * @param cart
+     * @param productsku
+     * @param quantity
+     * @return
+     */
     @Transactional
     public boolean updateCartItem(@Valid @NotNull Cart cart, @Valid @NotNull ProductSku productsku, @Valid @Min(1) long quantity) {
 

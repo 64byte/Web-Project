@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @Getter
@@ -19,6 +20,10 @@ public class AddNewAddressRequest {
     @NotBlank
     private String receiverPhoneNum;
 
+    @Email
+    @NotBlank
+    private String receiverEmail;
+
     @NotBlank
     private String postalCode;
 
@@ -29,7 +34,7 @@ public class AddNewAddressRequest {
     private String address2;
 
     public Address toEntity() {
-        return new Address(receiverName, receiverPhoneNum, postalCode, address1, address2, null);
+        return new Address(receiverName, receiverPhoneNum, receiverEmail, postalCode, address1, address2, null);
     }
 
 }

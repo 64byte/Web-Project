@@ -67,6 +67,7 @@ class DemoCommandLineRunner implements CommandLineRunner {
         Address address = Address.builder()
                 .receiverName("준영")
                 .receiverPhoneNum("01012341234")
+                .receiverEmail("123@naver.com")
                 .postalCode("01234")
                 .address1("dfaefasefff")
                 .address2("ererawerafasdfa")
@@ -78,6 +79,7 @@ class DemoCommandLineRunner implements CommandLineRunner {
         Address address2 = Address.builder()
                 .receiverName("1준영")
                 .receiverPhoneNum("01012341234")
+                .receiverEmail("123@naver.com")
                 .postalCode("01234")
                 .address1("dfaefasefff")
                 .address2("ererawerafasdfa")
@@ -97,7 +99,7 @@ class DemoCommandLineRunner implements CommandLineRunner {
 
 //        user.addUserAddress(userAddress);
 
-        Product product = new Product("test Prod", "CD1234-011", "this is test item");
+        Product product = new Product("test Prod", "CD1234-011", "this is test item", 1234, "원");
 
         productRepository.save(product);
 
@@ -111,7 +113,7 @@ class DemoCommandLineRunner implements CommandLineRunner {
         product.addProductSku(sku2);
 
 
-        Product product2 = new Product("test Prod2", "DA1234-001", "this is test item2");
+        Product product2 = new Product("test Prod2", "DA1234-001", "this is test item2", 4321, "원");
 
         productRepository.save(product2);
 
