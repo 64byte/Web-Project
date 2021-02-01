@@ -2,6 +2,7 @@ package com.story.backend.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.story.backend.address.entity.Address;
+import com.story.backend.cart.entity.Cart;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
@@ -42,6 +43,9 @@ public class User {
     @Column(name = "phone_num", length = 15, nullable = false)
     private String phoneNum;
 
+    @OneToOne(mappedBy = "user")
+    private Cart cart;
+
     @JsonManagedReference
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private final Set<Address> addresses = new HashSet<>();
@@ -67,7 +71,11 @@ public class User {
         address.setUser(this);
     }
 
-    public boolean isEqualOfUserId(UUID userid) {
-        return this.userId.equals(userid);
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isSamePasswordWith(String password) {
+        return this.password.equals(password);
     }
 }

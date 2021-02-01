@@ -1,6 +1,7 @@
 package com.story.backend.cart.dto;
 
 import com.sun.istack.Nullable;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,8 +15,6 @@ import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Getter
-@Setter
-@ToString
 public class AddProductToCartRequest {
   
     @Nullable
@@ -27,8 +26,10 @@ public class AddProductToCartRequest {
     @Min(1)
     private long quantity;
 
-    public boolean isEmptyCartId() {
-        return cartId == null;
+    @Builder
+    public AddProductToCartRequest(UUID cartId, UUID skuId, long quantity) {
+        this.cartId = cartId;
+        this.skuId = skuId;
+        this.quantity = quantity;
     }
-
 }

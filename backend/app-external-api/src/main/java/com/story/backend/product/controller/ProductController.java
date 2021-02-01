@@ -26,4 +26,11 @@ public class ProductController {
         return new ResponseEntity<>(CommonResponse.of(HttpStatus.OK.value(), null, productService.getProductById(productId)), HttpStatus.OK);
     }
 
+    @GetMapping("/{productId}/product-skus")
+    public ResponseEntity<CommonResponse> getRelatedProductSkusByProductId(@PathVariable UUID productId) {
+        return new ResponseEntity<>(
+                CommonResponse.of(HttpStatus.OK.value(), null, productService.getRelatedProductSkusByProductId(productId)),
+                HttpStatus.OK);
+    }
+
 }

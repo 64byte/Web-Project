@@ -2,6 +2,7 @@ package com.story.backend.user.controller;
 
 import com.story.backend.common.dto.CommonResponse;
 import com.story.backend.user.dto.UserRegistrationRequest;
+import com.story.backend.user.dto.UserUpdatePasswordRequest;
 import com.story.backend.user.entity.AuthUserDetails;
 import com.story.backend.user.entity.User;
 import com.story.backend.user.service.UserService;
@@ -31,18 +32,24 @@ public class UserController {
         return new ResponseEntity<>(CommonResponse.of(HttpStatus.CREATED.value(), null, userService.registerUser(userRegistrationRequest)), HttpStatus.CREATED);
     }
 
-    @GetMapping("/{userId}/addresses")
-    public ResponseEntity<CommonResponse> getAddressListOfUser(@PathVariable UUID userId, @AuthenticationPrincipal UserDetails userDetails) {
-        return new ResponseEntity<>(CommonResponse.of(HttpStatus.OK.value(), null, userService.getAddressListOfUser(userId, userDetails)), HttpStatus.OK);
+    @GetMapping
+    public ResponseEntity<CommonResponse> getUserInfo(@AuthenticationPrincipal UserDetails userDetails) {
+        return new ResponseEntity<>(CommonResponse.of(HttpStatus.OK.value(), null, userService.getUserInfoByPrincipal(userDetails)), HttpStatus.OK);
     }
 
-    @GetMapping("/{userId}/cartItems")
-    public ResponseEntity<CommonResponse> getCartItemListOfUser(@PathVariable UUID userId, @AuthenticationPrincipal UserDetails userDetails) {
-        return new ResponseEntity<>(CommonResponse.builder().build(), HttpStatus.BAD_REQUEST);
+    @PutMapping("/password")
+    public ResponseEntity<CommonResponse> updateUserPassword(UserUpdatePasswordRequest userUpdatePasswordRequest, @AuthenticationPrincipal UserDetails userDetails) {
+        return new ResponseEntity<>(
+                CommonResponse.of(HttpStatus.OK.value(), null, userService.updateUserPassword(userUpdatePasswordRequest, userDetails)), HttpStatus.OK);
     }
 
-    @GetMapping("/{userId}/orders")
-    public ResponseEntity<CommonResponse> getOrderListOfUser(@PathVariable UUID userId, @AuthenticationPrincipal UserDetails userDetails) {
+    @GetMapping("/addresses")
+    public ResponseEntity<CommonResponse> getAddressListOfUser(@AuthenticationPrincipal UserDetails userDetails) {
+        return new ResponseEntity<>(CommonResponse.of(HttpStatus.OK.value(), null, userService.getAddressListOfUser(userDetails)), HttpStatus.OK);
+    }
+
+    @GetMapping("/orders")
+    public ResponseEntity<CommonResponse> getOrderListOfUser(@AuthenticationPrincipal UserDetails userDetails) {
         return new ResponseEntity<>(CommonResponse.builder().build(), HttpStatus.BAD_REQUEST);
     }
 

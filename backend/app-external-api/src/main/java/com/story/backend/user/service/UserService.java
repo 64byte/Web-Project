@@ -2,6 +2,8 @@ package com.story.backend.user.service;
 
 import com.story.backend.address.entity.Address;
 import com.story.backend.user.dto.UserAddressResponse;
+import com.story.backend.user.dto.UserInfoResponse;
+import com.story.backend.user.dto.UserUpdatePasswordRequest;
 import com.story.backend.user.entity.AuthUserDetails;
 import com.story.backend.user.entity.User;
 import com.story.backend.user.exception.AlreadyRegisteredUserException;
@@ -34,6 +36,11 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    public UserInfoResponse getUserInfoByPrincipal(@Valid @NotNull UserDetails userDetails) {
+        AuthUserDetails authUserDetails = (AuthUserDetails) userDetails;
+        return UserInfoResponse.of(authUserDetails.getUser());
+    }
+
     /**
      *
      * @param userRegistrationRequest
@@ -49,18 +56,31 @@ public class UserService {
         return userRepository.save(userRegistrationRequest.toEntity()).getUserId();
     }
 
+    public boolean updateUserPassword(@Valid UserUpdatePasswordRequest userUpdatePasswordRequest, @Valid @NotNull UserDetails userDetails) {
+        AuthUserDetails authUserDetails = (AuthUserDetails) userDetails;
+        User user = authUserDetails.getUser();
+
+        userUpdatePasswordRequest.encodePassword(passwordEncoder);
+
+        if (!user.isSamePasswordWith(userUpdatePasswordRequest.getPassword())) {
+            throw new RuntimeException();
+        }
+
+        userUpdatePasswordRequest.encodeNewPassword(passwordEncoder);
+
+        user.setPassword(userUpdatePasswordRequest.getNewPassword());
+
+        userRepository.save(user);
+        return true;
+    }
+
     /**
      *
-     * @param userId
      * @param userDetails
      * @return
      */
-    public List<UserAddressResponse> getAddressListOfUser(@Valid @NotNull UUID userId, @Valid @NotNull UserDetails userDetails) {
+    public List<UserAddressResponse> getAddressListOfUser(@Valid @NotNull UserDetails userDetails) {
         AuthUserDetails authUserDetails = (AuthUserDetails)userDetails;
-
-        if (!authUserDetails.isEqualOfUserId(userId)) {
-            throw new BadCredentialsException("");
-        }
 
         return authUserDetails.getAddresses().stream().map(UserAddressResponse::of).collect(Collectors.toList());
     }
