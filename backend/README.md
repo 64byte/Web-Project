@@ -24,22 +24,45 @@
 
 - app-common
   도메인 계층의 패키지 (common, entity, repository)
-  - user
-    - [entity](https://github.com/64byte/Web-Project/tree/main/backend/app-common/src/main/java/com/story/backend/user/entity)
-    - [repository](https://github.com/64byte/Web-Project/tree/main/backend/app-common/src/main/java/com/story/backend/user/repository)
-  - address
-    - [entity](https://github.com/64byte/Web-Project/tree/main/backend/app-common/src/main/java/com/story/backend/address/entity)
-    - [repsository](https://github.com/64byte/Web-Project/tree/main/backend/app-common/src/main/java/com/story/backend/adderss/repository)
-  - 
+  - [common](https://github.com/64byte/Web-Project/tree/main/backend/app-common/src/main/java/com/story/backend/common/)
+  - [user](https://github.com/64byte/Web-Project/tree/main/backend/app-common/src/main/java/com/story/backend/user/)
+  - [address](https://github.com/64byte/Web-Project/tree/main/backend/app-common/src/main/java/com/story/backend/address/)
+  - [category](https://github.com/64byte/Web-Project/tree/main/backend/app-common/src/main/java/com/story/backend/category/)
+  - [product](https://github.com/64byte/Web-Project/tree/main/backend/app-common/src/main/java/com/story/backend/product/)
+  - [color](https://github.com/64byte/Web-Project/tree/main/backend/app-common/src/main/java/com/story/backend/color/)
+  - [cart](https://github.com/64byte/Web-Project/tree/main/backend/app-common/src/main/java/com/story/backend/cart/)
+  - [order](https://github.com/64byte/Web-Project/tree/main/backend/app-common/src/main/java/com/story/backend/order/)
+  - [authentication](https://github.com/64byte/Web-Project/tree/main/backend/app-common/src/main/java/com/story/backend/authentication/)
+
 - app-external-api
   외부 api 패키지 (common, controller, service)
+  - [common](https://github.com/64byte/Web-Project/tree/main/backend/app-external-api/src/main/java/com/story/backend/common/)
+  - [user](https://github.com/64byte/Web-Project/tree/main/backend/app-external-api/src/main/java/com/story/backend/user/)
+  - [address](https://github.com/64byte/Web-Project/tree/main/backend/app-external-api/src/main/java/com/story/backend/address/)
+  - [category](https://github.com/64byte/Web-Project/tree/main/backend/app-external-api/src/main/java/com/story/backend/category/)
+  - [product](https://github.com/64byte/Web-Project/tree/main/backend/app-external-api/src/main/java/com/story/backend/product/)
+  - [color](https://github.com/64byte/Web-Project/tree/main/backend/app-external-api/src/main/java/com/story/backend/color/)
+  - [cart](https://github.com/64byte/Web-Project/tree/main/backend/app-external-api/src/main/java/com/story/backend/cart/)
+  - [order](https://github.com/64byte/Web-Project/tree/main/backend/app-external-api/src/main/java/com/story/backend/order/)
+  - [authentication](https://github.com/64byte/Web-Project/tree/main/backend/app-external-api/src/main/java/com/story/backend/authentication/)
+  
 - app-internal-api
   내부 api 패키지 (common, backoffice controller, service)
+  - [common](https://github.com/64byte/Web-Project/tree/main/backend/app-inetnal-api/src/main/java/com/story/backend/common/)
+  - [user](https://github.com/64byte/Web-Project/tree/main/backend/app-inetnal-api/src/main/java/com/story/backend/user/)
+  - [address](https://github.com/64byte/Web-Project/tree/main/backend/app-inetnal-api/src/main/java/com/story/backend/address/)
+  - [category](https://github.com/64byte/Web-Project/tree/main/backend/app-inetnal-api/src/main/java/com/story/backend/category/)
+  - [product](https://github.com/64byte/Web-Project/tree/main/backend/app-inetnal-api/src/main/java/com/story/backend/product/)
+  - [color](https://github.com/64byte/Web-Project/tree/main/backend/app-inetnal-api/src/main/java/com/story/backend/color/)
+  - [cart](https://github.com/64byte/Web-Project/tree/main/backend/app-inetnal-api/src/main/java/com/story/backend/cart/)
+  - [order](https://github.com/64byte/Web-Project/tree/main/backend/app-inetnal-api/src/main/java/com/story/backend/order/)
+  - [authentication](https://github.com/64byte/Web-Project/tree/main/backend/app-inetnal-api/src/main/java/com/story/backend/authentication/)
+  
+
 - app-batch
   배치 서비스 패키지
 
-
-
+  
 ### Domain
 
 - user 
@@ -53,7 +76,24 @@
 - order
 - authentication
 
-
+## Database
+- [SCHEME](https://github.com/64byte/Web-Project/tree/main/backend\app-common\src\main\resources\db\migration)
+- 각 테이블은 phantom id (auto increment, 이하 id)와 UUID를 가진다.
+  - id는 내부 로직에서 사용하는 PK, UUID는 외부에서 사용하는 PK이다. (N:M 병합 테이블의 경우에는 주로 다른 컨트롤러 혹은 서비스에 의해 접근하므로 id만 가진다)
+- 테이블 내용
+  - user (가입한 사용자 관련)
+  - address (비회원 주문 address, user가 저장하고 있는 address)
+  - category (페이지 카테고리, New arrival, mens, womens, etc..)
+  - product (제품)
+  - product_sku (제품 stock keeping unit, 여기선 주로 사이즈)
+  - color (제품 색깔)
+  - cart
+    - 비회원, 사용자가 아이템을 담을 때 부여받는 고유 ID
+  - cart_item
+    - cart와 연결되어 cart 안에 담겨져 있는 아이템
+  - order
+    - 제품 주문 내용
+- ~~index 작성 중~~  
 
 ### Branch 전략
 
@@ -64,13 +104,9 @@
 - feature/fe-00 (frontend branches, ~~개발 중~~)
 - feature/be-00 (backend branches)
 
-
-
 ### ~~Test~~
 
 - ~~작성 중~~
-
-
 
 ### 코드 작성 관련
 
@@ -95,3 +131,7 @@
   - ErrorResponse (Http code, internal code, message)
     - 예외가 발생된 경우 반환되는 Response
 
+- Controller 예외는 한 곳에서 처리한다. (해당 아이디어는 [여기](https://github.com/cheese10yun/spring-guide/blob/master/docs/exception-guide.md) 를 참고했음)
+  - app-external-api
+    - [GlobalExceptionHandler](https://github.com/64byte/Web-Project/blob/main/backend/app-external-api/src/main/java/com/story/backend/common/handler/GlobalExceptionHandler.java)
+  

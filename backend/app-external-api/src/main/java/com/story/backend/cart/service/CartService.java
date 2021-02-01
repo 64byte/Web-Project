@@ -14,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.Optional;
 import java.util.UUID;
 
 @Validated
@@ -33,6 +34,11 @@ public class CartService {
         this.productSkuService = productSkuService;
     }
 
+    /**
+     * CartId를 이용해서 카트 정보를 가져온다.
+     * @param cartId
+     * @return
+     */
     public CartInfoResponse getCartInfoById(@Valid @NotNull UUID cartId) {
         Cart cart = cartRepository.findByCartId(cartId)
                 .orElseThrow();
@@ -40,6 +46,15 @@ public class CartService {
         return CartInfoResponse.of(cart);
     }
 
+    /**
+     * cart에 아이템을 담는다.
+     * cartId가 없는 경우에는 cart를 만들고 그 안에 아이템을 담은 후(cartItemService를 통해)에 cartId를 반환한다.
+     * cartId가 있는 경우에는 해당 카트에 아이템을 담는다.
+     * 요청된 skuId가 없거나, 재고가 부족한 경우 예외를 던진다
+     * @param addProductToCartRequest ( (option)cartId, skuId, quantity )
+     * @param userDetails
+     * @return
+     */
     @Transactional
     public UUID addProductToCart(@Valid AddProductToCartRequest addProductToCartRequest, UserDetails userDetails) {
         Cart cart = cartRepository.findByCartId(addProductToCartRequest.getCartId())
@@ -52,6 +67,8 @@ public class CartService {
             throw new RuntimeException();
         }
 
+        cartRepository.save(cart);
+
         if (!cartItemService.updateCartItem(cart, productSku, addProductToCartRequest.getQuantity())) {
             log.error("cart Id {" + cart.getCartId() + "} is failed to add product sku {" + productSku.getSkuId() + "}.");
             throw new RuntimeException();
@@ -60,4 +77,12 @@ public class CartService {
         return cart.getCartId();
     }
 
+    /**
+     * (내부 로직용) cartId를 이용해서 Cart를 얻어온다.
+     * @param cartId
+     * @return
+     */
+    public Optional<Cart> getCartByCartId(@Valid @NotNull UUID cartId) {
+        return cartRepository.findByCartId(cartId);
+    }
 }
