@@ -20,12 +20,8 @@ public class UserUpdatePasswordRequest {
     @Min(1)
     private String newPassword;
 
-    public void encodePassword(PasswordEncoder passwordEncoder) {
+    public void encodePasswordInfo(PasswordEncoder passwordEncoder) {
         this.password = passwordEncoder.encode(password);
-    }
-
-    public void encodeNewPassword(PasswordEncoder passwordEncoder) {
         this.newPassword = passwordEncoder.encode(newPassword);
     }
-
 }

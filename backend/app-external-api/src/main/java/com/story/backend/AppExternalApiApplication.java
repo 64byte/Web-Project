@@ -110,6 +110,20 @@ class DemoCommandLineRunner implements CommandLineRunner {
         product.addProductSku(sku);
         product.addProductSku(sku2);
 
+
+        Product product2 = new Product("test Prod2", "DA1234-001", "this is test item2");
+
+        productRepository.save(product2);
+
+        ProductSku sku3 = new ProductSku(product2,"260", 7);
+        ProductSku sku4 = new ProductSku(product2, "265", 8);
+        skuRepository.save(sku3);
+        skuRepository.save(sku4);
+
+
+        product.addProductSku(sku3);
+        product.addProductSku(sku4);
+
 //        productSkuRepository.save(new ProductSku(product, sku));
         //      productSkuRepository.save(new ProductSku(product, sku2));
 
@@ -119,9 +133,9 @@ class DemoCommandLineRunner implements CommandLineRunner {
 //            System.out.println(addr.getAddressId());
 //        });
 
-        System.out.println(product.getSkus().isEmpty());
+        System.out.println(product.getProductSkus().isEmpty());
 
-        product.getSkus().forEach((s) -> {
+        product.getProductSkus().forEach((s) -> {
             System.out.println(s.getId() + ", " + s.getSkuId() + ", " + s.getProduct().getProductId());
         });
     }

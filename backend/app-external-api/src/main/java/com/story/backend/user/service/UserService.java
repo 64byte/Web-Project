@@ -36,13 +36,20 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    /**
+     * 인증된 정보를 이용하여 해당 유저의 정보를 가져옵니다.
+     * (email, fullName, phoneNum)
+     * @param userDetails
+     * @return
+     */
     public UserInfoResponse getUserInfoByPrincipal(@Valid @NotNull UserDetails userDetails) {
         AuthUserDetails authUserDetails = (AuthUserDetails) userDetails;
         return UserInfoResponse.of(authUserDetails.getUser());
     }
 
     /**
-     *
+     * 신규 유저를 등록합니다.
+     * (email, password, fullName, phoneNum)
      * @param userRegistrationRequest
      * @return
      */
@@ -56,17 +63,23 @@ public class UserService {
         return userRepository.save(userRegistrationRequest.toEntity()).getUserId();
     }
 
+    /**
+     * 유저의 비밀번호를 변경합니다.
+     * 기존 비밀번호와 새로운 비밀번호를 받습니다.
+     * 기존 비밀번호가 틀릴 경우, 예외를 던집니다.
+     * @param userUpdatePasswordRequest
+     * @param userDetails
+     * @return
+     */
     public boolean updateUserPassword(@Valid UserUpdatePasswordRequest userUpdatePasswordRequest, @Valid @NotNull UserDetails userDetails) {
         AuthUserDetails authUserDetails = (AuthUserDetails) userDetails;
         User user = authUserDetails.getUser();
 
-        userUpdatePasswordRequest.encodePassword(passwordEncoder);
+        userUpdatePasswordRequest.encodePasswordInfo(passwordEncoder);
 
         if (!user.isSamePasswordWith(userUpdatePasswordRequest.getPassword())) {
             throw new RuntimeException();
         }
-
-        userUpdatePasswordRequest.encodeNewPassword(passwordEncoder);
 
         user.setPassword(userUpdatePasswordRequest.getNewPassword());
 
@@ -75,7 +88,7 @@ public class UserService {
     }
 
     /**
-     *
+     * 인증된 정보를 이용하여 해당 유저의 등록된 주소 정보를 가져옵니다.
      * @param userDetails
      * @return
      */
@@ -86,7 +99,7 @@ public class UserService {
     }
 
     /**
-     *
+     * email을 이용해 이미 등록된 유저인지 판별합니다.
      * @param email
      * @return
      */

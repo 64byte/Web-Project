@@ -21,10 +21,22 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
+    /**
+     * product Id를 이용하여 product의 기본 정보를 반환합니다.
+     * (productId, name, styleCode, description)
+     * @param productId
+     * @return
+     */
     public ProductItemResponse getProductById(@Valid @NotNull UUID productId) {
         return ProductItemResponse.of(productRepository.findByProductId(productId).orElseThrow());
     }
 
+    /**
+     * productId에 연결되는 product Sku 정보를 가져옵니다.
+     * product sku의 경우에는 (sku Id, quantity)
+     * @param productId
+     * @return
+     */
     public List<ProductSkuResponse> getRelatedProductSkusByProductId(@Valid @NotNull UUID productId) {
         Product product = productRepository.findByProductId(productId).orElseThrow();
 

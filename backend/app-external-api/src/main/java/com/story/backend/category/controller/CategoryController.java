@@ -21,10 +21,4 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping("/{categoryId}/products")
-    public ResponseEntity<CommonResponse> getAllProductOfCategory(@PathVariable UUID categoryId) {
-        return new ResponseEntity<>(CommonResponse.builder().build(), HttpStatus.OK);
-    }
-
-
 }

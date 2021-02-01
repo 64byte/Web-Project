@@ -33,6 +33,12 @@ public class Product {
     @Column(name = "description", nullable = false)
     private String description;
 
+    @Column(name = "price", nullable = false)
+    private long price;
+
+    @Column(name = "currency", nullable = false)
+    private String currency;
+
     @JsonManagedReference
     @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, orphanRemoval = true)
     private final Set<ProductSku> productSkus = new HashSet<>();
@@ -46,10 +52,12 @@ public class Product {
     private LocalDateTime createdAt;
 
     @Builder
-    public Product(String name, String styleCode, String description) {
+    public Product(String name, String styleCode, String description, long price, String currency) {
         this.name = name;
         this.styleCode = styleCode;
         this.description = description;
+        this.price = price;
+        this.currency = currency;
     }
 
     public void addProductSku(ProductSku productSku) {
