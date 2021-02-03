@@ -15,13 +15,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(AlreadyRegisteredUserException.class)
     protected ResponseEntity<ErrorResponse> handleAlreadyRegisteredUserException(AlreadyRegisteredUserException e) {
-        log.error("handleAlreadyRegisteredUserException", e);
+        log.error("handleAlreadyRegisteredUserException: ", e);
         return new ResponseEntity<>(ErrorResponse.builder().build(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(Exception.class)
     protected ResponseEntity<ErrorResponse> handleException(Exception e) {
-        log.error("handleException", e);
+        log.error("handleException: ", e);
         return new ResponseEntity<>(ErrorResponse.builder().build(), HttpStatus.BAD_REQUEST);
     }
 

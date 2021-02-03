@@ -3,16 +3,17 @@ package com.story.backend.authentication.filter;
 import com.story.backend.authentication.provider.JwtProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.StringUtils;
 import org.springframework.web.filter.GenericFilterBean;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Optional;
 
 public class JwtFilter extends GenericFilterBean {
     private static final String authorizationHeaderName = "Authorization";
     private static final String authorizationHeaderPrefix = "Bearer ";
-    private static final int getAuthorizationHeaderStartIdx = 7;
 
     private final JwtProvider jwtProvider;
 
@@ -24,25 +25,29 @@ public class JwtFilter extends GenericFilterBean {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
             throws IOException, ServletException {
 
-        String token = resolveAuthorizationHeader(request);
-
-        if (token != null && JwtProvider.validateToken(token)) {
-            Authentication auth = jwtProvider.getAuthentication(token);
-            SecurityContextHolder.getContext().setAuthentication(auth);
-        }
+        resolveAuthorizationHeader(request)
+                .ifPresent((token) -> {
+                    if (JwtProvider.validateToken(token)) {
+                        Authentication auth = jwtProvider.getAuthentication(token);
+                        SecurityContextHolder.getContext().setAuthentication(auth);
+                    }
+                });
 
         filterChain.doFilter(request, response);
     }
 
-    private String resolveAuthorizationHeader(ServletRequest request) {
+    private Optional<String> resolveAuthorizationHeader(ServletRequest request) {
         HttpServletRequest httpServletRequest = (HttpServletRequest)request;
         String headerContent = httpServletRequest.getHeader(authorizationHeaderName);
 
-        if (headerContent != null && headerContent.startsWith(authorizationHeaderPrefix)) {
-            return headerContent.substring(getAuthorizationHeaderStartIdx);
+        if (!hasAuthorizationHeaderAndValue(headerContent)) {
+            return Optional.empty();
         }
 
-        return null;
+        return Optional.of(headerContent.substring(authorizationHeaderPrefix.length()));
     }
 
+    private boolean hasAuthorizationHeaderAndValue(String headerContent) {
+        return StringUtils.hasText(headerContent) && headerContent.startsWith(authorizationHeaderPrefix);
+    }
 }

@@ -1,10 +1,7 @@
 package com.story.backend.cart.dto;
 
 import com.sun.istack.Nullable;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +12,7 @@ import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AddProductToCartRequest {
   
     @Nullable

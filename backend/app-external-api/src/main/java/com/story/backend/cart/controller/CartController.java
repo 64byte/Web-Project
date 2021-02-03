@@ -36,6 +36,7 @@ public class CartController {
                 HttpStatus.CREATED);
     }
 
-
+    @PostMapping("/shipping")
+    public ResponseEntity<CommonResponse>
 
 }
