@@ -1,16 +1,18 @@
 package com.story.backend.authentication.provider;
 
+import com.story.backend.authentication.config.JwtConfig;
 import com.story.backend.authentication.exception.InvalidJwtAuthenticationException;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import lombok.Value;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.security.Key;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -18,11 +20,7 @@ import java.time.LocalDateTime;
 @Component
 public class JwtProvider {
 
-    private static final String secret = "fd4db9644040cb8231cf7fb727a7ff23a85b985da450c0c840976127c9c0adfe0ef9a4f7e88ce7a1585dd59cf78f0ea57535d6b1cd744c1ee62d726572f51432";
-
-    private static final Key secretKey = Keys.hmacShaKeyFor(secret.getBytes());
-
-    private static final long termOfExpiration = 3600000;
+    private Key secretKey;
 
     private final UserDetailsService userDetailsService;
 
@@ -30,16 +28,21 @@ public class JwtProvider {
         this.userDetailsService = userDetailsService;
     }
 
+    @PostConstruct
+    public void init() {
+        secretKey = Keys.hmacShaKeyFor(JwtConfig.getSecret().getBytes());
+    }
+
     public Authentication getAuthentication(String token) {
-        UserDetails userDetails = this.userDetailsService.loadUserByUsername(getUsername(token));
+        UserDetails userDetails = this.userDetailsService.loadUserByUsername(getSubject(token));
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
-    public static String generateToken(String username) {
+    public String generateToken(String username) {
         Claims claims = Jwts.claims().setSubject(username);
 
         Timestamp now = Timestamp.valueOf(LocalDateTime.now());
-        Timestamp expr = new Timestamp(now.getTime() + termOfExpiration);
+        Timestamp expr = new Timestamp(now.getTime() + JwtConfig.getTermOfExpiration());
 
         return Jwts.builder()
                 .setClaims(claims)
@@ -49,7 +52,7 @@ public class JwtProvider {
                 .compact();
     }
 
-    public static String getUsername(String token) {
+    public String getSubject(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(secretKey)
                 .build()
@@ -58,7 +61,7 @@ public class JwtProvider {
                 .getSubject();
     }
 
-    public static boolean validateToken(String token) {
+    public boolean validateToken(String token) {
         try {
             Jws<Claims> claims = Jwts
                     .parserBuilder()

@@ -1,6 +1,7 @@
 package com.story.backend.cart.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.story.backend.address.entity.Address;
 import com.story.backend.user.entity.User;
 import lombok.*;
 import org.hibernate.annotations.Formula;
@@ -29,6 +30,10 @@ public class Cart {
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
+    @OneToOne
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
 
     @Formula("(select sum(ci.quantity) from cart_item ci where ci.cart_id = id)")
     private long totalQuantity;

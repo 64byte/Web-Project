@@ -48,17 +48,16 @@
   - [order](https://github.com/64byte/Web-Project/tree/main/backend/app-external-api/src/main/java/com/story/backend/order/)
   - [authentication](https://github.com/64byte/Web-Project/tree/main/backend/app-external-api/src/main/java/com/story/backend/authentication/)
   
-- app-internal-api
+- app-internal-api (작성중)
   내부 api 패키지 (common, backoffice controller, service)
-  - [common](https://github.com/64byte/Web-Project/tree/main/backend/app-inetnal-api/src/main/java/com/story/backend/common/)
   - [user](https://github.com/64byte/Web-Project/tree/main/backend/app-inetnal-api/src/main/java/com/story/backend/user/)
   - [address](https://github.com/64byte/Web-Project/tree/main/backend/app-inetnal-api/src/main/java/com/story/backend/address/)
-  - [category](https://github.com/64byte/Web-Project/tree/main/backend/app-inetnal-api/src/main/java/com/story/backend/category/)
-  - [product](https://github.com/64byte/Web-Project/tree/main/backend/app-inetnal-api/src/main/java/com/story/backend/product/)
-  - [color](https://github.com/64byte/Web-Project/tree/main/backend/app-inetnal-api/src/main/java/com/story/backend/color/)
-  - [cart](https://github.com/64byte/Web-Project/tree/main/backend/app-inetnal-api/src/main/java/com/story/backend/cart/)
-  - [order](https://github.com/64byte/Web-Project/tree/main/backend/app-inetnal-api/src/main/java/com/story/backend/order/)
-  - [authentication](https://github.com/64byte/Web-Project/tree/main/backend/app-inetnal-api/src/main/java/com/story/backend/authentication/)
+  - [~~category~~](https://github.com/64byte/Web-Project/tree/main/backend/app-inetnal-api/src/main/java/com/story/backend/category/)
+  - [~~product~~](https://github.com/64byte/Web-Project/tree/main/backend/app-inetnal-api/src/main/java/com/story/backend/product/)
+  - [~~color~~](https://github.com/64byte/Web-Project/tree/main/backend/app-inetnal-api/src/main/java/com/story/backend/color/)
+  - [~~cart~~](https://github.com/64byte/Web-Project/tree/main/backend/app-inetnal-api/src/main/java/com/story/backend/cart/)
+  - [~~order~~](https://github.com/64byte/Web-Project/tree/main/backend/app-inetnal-api/src/main/java/com/story/backend/order/)
+  - [~~authentication~~](https://github.com/64byte/Web-Project/tree/main/backend/app-inetnal-api/src/main/java/com/story/backend/authentication/)
   
 
 - app-mail-server (작성중)

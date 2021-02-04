@@ -1,10 +1,14 @@
 package com.story.backend.order.entity;
 
+import com.story.backend.address.entity.Address;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
@@ -23,7 +27,18 @@ public class Order {
     @Column(name = "order_number", nullable = false, updatable = false, unique = true)
     private String orderNumber;
 
+    @Column(name = "paid_amount", nullable = false)
+    private long paidAmount;
 
+    @Column(name = "apply_num", nullable = false)
+    private String applyNum;
 
+    @LastModifiedDate
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    @CreatedDate
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 
 }

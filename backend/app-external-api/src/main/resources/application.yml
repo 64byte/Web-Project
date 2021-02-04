@@ -2,7 +2,6 @@ server:
   port: 8080
 
 spring:
-
   flyway:
     enabled: false
 
@@ -13,11 +12,14 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
       dialect: org.hibernate.dialect.PostgreSQL95Dialect
-    properties:
-        hibernate.format_sql: true
     generate-ddl: true
     show-sql: true
-
     database: POSTGRESQL
+
+app:
+  security:
+    jwt:
+      secret: 'fd4db9644040cb8231cf7fb727a7ff23a85b985da450c0c840976127c9c0adfe0ef9a4f7e88ce7a1585dd59cf78f0ea57535d6b1cd744c1ee62d726572f51432'
+      term-of-expiration: 3600000

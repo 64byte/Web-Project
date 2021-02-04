@@ -4,7 +4,6 @@ import lombok.*;
 import javax.persistence.Id;
 
 @Getter
-@Setter
 public class AuthToken {
     @Id
     private String id;

@@ -29,13 +29,11 @@ public class CartController {
                 CommonResponse.of(HttpStatus.OK.value(), "null", cartService.getCartInfoById(cartId)), HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<CommonResponse> addToCart(@RequestBody AddProductToCartRequest addProductToCartRequest, @AuthenticationPrincipal UserDetails userDetails) {
         return new ResponseEntity<>(
                 CommonResponse.of(HttpStatus.CREATED.value(), "null", cartService.addProductToCart(addProductToCartRequest, userDetails)),
                 HttpStatus.CREATED);
     }
-
-
 
 }
