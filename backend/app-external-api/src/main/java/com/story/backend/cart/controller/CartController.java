@@ -1,6 +1,7 @@
 package com.story.backend.cart.controller;
 
 import com.story.backend.cart.dto.AddProductToCartRequest;
+import com.story.backend.cart.exception.NotFoundCartException;
 import com.story.backend.cart.service.CartService;
 import com.story.backend.common.dto.CommonResponse;
 import com.story.backend.user.entity.User;
@@ -24,7 +25,7 @@ public class CartController {
     }
 
     @GetMapping("/{cartId}")
-    public ResponseEntity<CommonResponse> getCartInfoById(@PathVariable UUID cartId) {
+    public ResponseEntity<CommonResponse> getCartInfoById(@PathVariable UUID cartId) throws NotFoundCartException {
         return new ResponseEntity<>(
                 CommonResponse.of(HttpStatus.OK.value(), "null", cartService.getCartInfoById(cartId)), HttpStatus.OK);
     }

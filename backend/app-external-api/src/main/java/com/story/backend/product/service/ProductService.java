@@ -3,6 +3,8 @@ package com.story.backend.product.service;
 import com.story.backend.product.dto.ProductItemResponse;
 import com.story.backend.product.dto.ProductSkuResponse;
 import com.story.backend.product.entity.Product;
+import com.story.backend.product.exception.NotFoundProductException;
+import com.story.backend.product.exception.NotFoundProductSkuException;
 import com.story.backend.product.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +29,9 @@ public class ProductService {
      * @param productId
      * @return
      */
-    public ProductItemResponse getProductById(@Valid @NotNull UUID productId) {
-        return ProductItemResponse.of(productRepository.findByProductId(productId).orElseThrow());
+    public ProductItemResponse getProductById(@Valid @NotNull UUID productId) throws NotFoundProductException {
+        return ProductItemResponse.of(productRepository.findByProductId(productId)
+                .orElseThrow(NotFoundProductException::new));
     }
 
     /**
@@ -37,8 +40,9 @@ public class ProductService {
      * @param productId
      * @return
      */
-    public List<ProductSkuResponse> getRelatedProductSkusByProductId(@Valid @NotNull UUID productId) {
-        Product product = productRepository.findByProductId(productId).orElseThrow();
+    public List<ProductSkuResponse> getRelatedProductSkusByProductId(@Valid @NotNull UUID productId) throws NotFoundProductException {
+        Product product = productRepository.findByProductId(productId)
+                .orElseThrow(NotFoundProductException::new);
 
         return product.getProductSkus().stream().map(ProductSkuResponse::of).collect(Collectors.toList());
     }

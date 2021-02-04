@@ -2,6 +2,7 @@ package com.story.backend.product.service;
 
 import com.story.backend.product.dto.ProductSkuResponse;
 import com.story.backend.product.entity.ProductSku;
+import com.story.backend.product.exception.NotFoundProductSkuException;
 import com.story.backend.product.repository.ProductSkuRepository;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,7 @@ public class ProductSkuService {
      */
     public ProductSkuResponse getProductSkuInfoById(@Valid @NotNull UUID productSkuId) {
         ProductSku productSku = productSkuRepository.findBySkuId(productSkuId)
-                .orElseThrow();
+                .orElseThrow(NotFoundProductSkuException::new);
 
         return ProductSkuResponse.of(productSku);
     }

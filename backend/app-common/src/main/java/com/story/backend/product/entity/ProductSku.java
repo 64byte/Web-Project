@@ -47,7 +47,7 @@ public class ProductSku {
         this.quantity = quantity;
     }
 
-    public boolean isExceedQuantity(long addQuantity) {
+    public boolean isExceedRequestAddQuantity(long addQuantity) {
         return quantity < addQuantity;
     }
 }
