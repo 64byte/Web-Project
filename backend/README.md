@@ -50,14 +50,14 @@
   
 - app-internal-api (작성중)
   내부 api 패키지 (common, backoffice controller, service)
-  - [user](https://github.com/64byte/Web-Project/tree/main/backend/app-inetnal-api/src/main/java/com/story/backend/user/)
-  - [address](https://github.com/64byte/Web-Project/tree/main/backend/app-inetnal-api/src/main/java/com/story/backend/address/)
-  - [~~category~~](https://github.com/64byte/Web-Project/tree/main/backend/app-inetnal-api/src/main/java/com/story/backend/category/)
-  - [~~product~~](https://github.com/64byte/Web-Project/tree/main/backend/app-inetnal-api/src/main/java/com/story/backend/product/)
-  - [~~color~~](https://github.com/64byte/Web-Project/tree/main/backend/app-inetnal-api/src/main/java/com/story/backend/color/)
-  - [~~cart~~](https://github.com/64byte/Web-Project/tree/main/backend/app-inetnal-api/src/main/java/com/story/backend/cart/)
-  - [~~order~~](https://github.com/64byte/Web-Project/tree/main/backend/app-inetnal-api/src/main/java/com/story/backend/order/)
-  - [~~authentication~~](https://github.com/64byte/Web-Project/tree/main/backend/app-inetnal-api/src/main/java/com/story/backend/authentication/)
+  - [user](https://github.com/64byte/Web-Project/tree/main/backend/app-internal-api/src/main/java/com/story/backend/user)
+  - [address](https://github.com/64byte/Web-Project/tree/main/backend/app-internal-api/src/main/java/com/story/backend/address/)
+  - [~~category~~](https://github.com/64byte/Web-Project/tree/main/backend/app-internal-api/src/main/java/com/story/backend/category/)
+  - [~~product~~](https://github.com/64byte/Web-Project/tree/main/backend/app-internal-api/src/main/java/com/story/backend/product/)
+  - [~~color~~](https://github.com/64byte/Web-Project/tree/main/backend/app-internal-api/src/main/java/com/story/backend/color/)
+  - [~~cart~~](https://github.com/64byte/Web-Project/tree/main/backend/app-internal-api/src/main/java/com/story/backend/cart/)
+  - [~~order~~](https://github.com/64byte/Web-Project/tree/main/backend/app-internal-api/src/main/java/com/story/backend/order/)
+  - [~~authentication~~](https://github.com/64byte/Web-Project/tree/main/backend/app-internal-api/src/main/java/com/story/backend/authentication/)
   
 
 - app-mail-server (작성중)
@@ -139,4 +139,7 @@
   - app-external-api
     - [GlobalExceptionHandler](https://github.com/64byte/Web-Project/blob/main/backend/app-external-api/src/main/java/com/story/backend/common/handler/GlobalExceptionHandler.java)
 
+- Setter 사용 최소화 (@Data or class 단위의 @Setter 사용은 안하도록함)
+  - 의도치 않은 변경을 최소화하기 위함. 필요하다면 필드 단위에서 Setter
   
+--------------------------------------------------------------------------------------------------------------------------------------------------

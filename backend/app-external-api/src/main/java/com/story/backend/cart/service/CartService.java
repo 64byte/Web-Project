@@ -3,8 +3,12 @@ package com.story.backend.cart.service;
 import com.story.backend.cart.dto.AddProductToCartRequest;
 import com.story.backend.cart.dto.CartInfoResponse;
 import com.story.backend.cart.entity.Cart;
+import com.story.backend.cart.exception.FailedAddToCartException;
+import com.story.backend.cart.exception.NotFoundCartException;
+import com.story.backend.cart.exception.OutOfStockException;
 import com.story.backend.cart.repository.CartRepository;
 import com.story.backend.product.entity.ProductSku;
+import com.story.backend.product.exception.NotFoundProductSkuException;
 import com.story.backend.product.service.ProductSkuService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -39,9 +43,9 @@ public class CartService {
      * @param cartId
      * @return
      */
-    public CartInfoResponse getCartInfoById(@Valid @NotNull UUID cartId) {
+    public CartInfoResponse getCartInfoById(@Valid @NotNull UUID cartId) throws NotFoundCartException {
         Cart cart = cartRepository.findByCartId(cartId)
-                .orElseThrow();
+                .orElseThrow(NotFoundCartException::new);
 
         return CartInfoResponse.of(cart);
     }
@@ -61,17 +65,17 @@ public class CartService {
                 .orElseGet(() -> Cart.builder().build());
 
         ProductSku productSku = productSkuService.getProductSkuBySkuId(addProductToCartRequest.getSkuId())
-                 .orElseThrow(RuntimeException::new);
+                 .orElseThrow(NotFoundProductSkuException::new);
 
-        if (productSku.isExceedQuantity(addProductToCartRequest.getQuantity())) {
-            throw new RuntimeException();
+        if (productSku.isExceedRequestAddQuantity(addProductToCartRequest.getQuantity())) {
+            throw new OutOfStockException();
         }
 
         cartRepository.save(cart);
 
         if (!cartItemService.updateCartItem(cart, productSku, addProductToCartRequest.getQuantity())) {
             log.error("cart Id {" + cart.getCartId() + "} is failed to add product sku {" + productSku.getSkuId() + "}.");
-            throw new RuntimeException();
+            throw new FailedAddToCartException();
         }
 
         return cart.getCartId();

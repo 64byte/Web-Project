@@ -7,6 +7,7 @@ import com.story.backend.user.dto.UserUpdatePasswordRequest;
 import com.story.backend.user.entity.AuthUserDetails;
 import com.story.backend.user.entity.User;
 import com.story.backend.user.exception.AlreadyRegisteredUserException;
+import com.story.backend.user.exception.UserBadCredentialsException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import com.story.backend.user.exception.AlreadyRegisteredUserException;
@@ -56,7 +57,7 @@ public class UserService {
     public UUID registerUser(@Valid UserRegistrationRequest userRegistrationRequest) {
 
         if (isAlreadyRegisteredUser(userRegistrationRequest.getEmail())) {
-            throw new AlreadyRegisteredUserException("");
+            throw new AlreadyRegisteredUserException();
         }
 
         userRegistrationRequest.encodePassword(passwordEncoder);
@@ -78,7 +79,7 @@ public class UserService {
         userUpdatePasswordRequest.encodePasswordInfo(passwordEncoder);
 
         if (!user.isSamePasswordWith(userUpdatePasswordRequest.getPassword())) {
-            throw new RuntimeException();
+            throw new UserBadCredentialsException();
         }
 
         user.setPassword(userUpdatePasswordRequest.getNewPassword());
