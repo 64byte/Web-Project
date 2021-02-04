@@ -33,8 +33,6 @@ public class Order {
     @Column(name = "apply_num", nullable = false)
     private String applyNum;
 
-    private Address address;
-
     @LastModifiedDate
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
