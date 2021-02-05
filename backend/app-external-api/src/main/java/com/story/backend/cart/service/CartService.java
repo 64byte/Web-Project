@@ -89,4 +89,14 @@ public class CartService {
     public Optional<Cart> getCartByCartId(@Valid @NotNull UUID cartId) {
         return cartRepository.findByCartId(cartId);
     }
+
+    @Transactional
+    public void emptyCartItems(@Valid @NotNull UUID cartId) {
+        Cart cart = cartRepository.findByCartId(cartId)
+                .orElseThrow();
+
+        cart.getCartItems().clear();
+
+        cartRepository.save(cart);
+    }
 }

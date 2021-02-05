@@ -53,4 +53,13 @@ public class Order {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+    public Order(String impUid, String merchantUid, String payMethod, String status, long paidAmount, String applyNum) {
+        this.impUid = impUid;
+        this.merchantUid = merchantUid;
+        this.payMethod = payMethod;
+        this.status = status;
+        this.paidAmount = paidAmount;
+        this.applyNum = applyNum;
+    }
+
 }
