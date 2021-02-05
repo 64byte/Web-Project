@@ -27,6 +27,18 @@ public class Order {
     @Column(name = "order_number", nullable = false, updatable = false, unique = true)
     private String orderNumber;
 
+    @Column(name = "imp_uid", nullable = false, updatable = false, unique = true)
+    private String impUid;
+
+    @Column(name = "merchant_uid", nullable = false, updatable = false, unique = true)
+    private String merchantUid;
+
+    @Column(name = "pay_method", nullable = false, updatable = false)
+    private String payMethod;
+
+    @Column(name = "status", nullable = false, updatable = false)
+    private String status;
+
     @Column(name = "paid_amount", nullable = false)
     private long paidAmount;
 

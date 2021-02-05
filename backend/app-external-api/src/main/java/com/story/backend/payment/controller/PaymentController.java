@@ -15,11 +15,11 @@ public class PaymentController {
 
     /**
      * Iamport 결제 완료시 호출되는 endpoint
-     * frontend -> IAMPORT -> PG -> IAMPORT -> /api/payments/return
+     * frontend -> IAMPORT -> PG -> IAMPORT -> /api/payments/results
      * @param paymentResultRequest
      * @return
      */
-    @PostMapping("/return")
+    @PostMapping("/results")
     public ResponseEntity<CommonResponse> returnPayment(@RequestBody PaymentResultRequest paymentResultRequest) {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }

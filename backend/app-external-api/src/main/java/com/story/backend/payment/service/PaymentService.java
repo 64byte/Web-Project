@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -18,16 +17,16 @@ public class PaymentService {
 
     private final OrderService orderService;
 
-    private final PaymentIamportApiService paymentIamportApiService;
+    private final IamportApiService paymentIamportApiService;
 
-    public PaymentService(CartService cartService, OrderService orderService, PaymentIamportApiService paymentIamportApiService) {
+    public PaymentService(CartService cartService, OrderService orderService, IamportApiService paymentIamportApiService) {
         this.cartService = cartService;
         this.orderService = orderService;
         this.paymentIamportApiService = paymentIamportApiService;
     }
 
     @Transactional
-    public UUID verifyAndGenerateOrder(@Valid PaymentResultRequest paymentResultRequest) {
+    public UUID verifyPayments(@Valid PaymentResultRequest paymentResultRequest) {
         // 예외 반환 시에 변조된 주문
         if (!paymentIamportApiService.verifyPaymentByMerchantId()) {
             throw new RuntimeException();

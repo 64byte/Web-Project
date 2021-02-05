@@ -13,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.nio.file.attribute.UserPrincipal;
 import java.security.Principal;
 import java.util.UUID;
@@ -52,5 +54,4 @@ public class UserController {
     public ResponseEntity<CommonResponse> getOrderListOfUser(@AuthenticationPrincipal UserDetails userDetails) {
         return new ResponseEntity<>(CommonResponse.builder().build(), HttpStatus.BAD_REQUEST);
     }
-
 }

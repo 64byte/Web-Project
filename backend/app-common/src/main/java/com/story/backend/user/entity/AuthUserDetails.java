@@ -23,6 +23,8 @@ public class AuthUserDetails implements UserDetails {
 
     private String token;
 
+    private String someValue;
+
     public AuthUserDetails(User user, String token) {
         super();
         this.user = user;
