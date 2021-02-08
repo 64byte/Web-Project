@@ -21,4 +21,8 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
+    @GetMapping
+    public ResponseEntity<CommonResponse> getAllCategories() {
+        return new ResponseEntity<>(CommonResponse.of(HttpStatus.OK.value(), null, categoryService.getAllCategories()), HttpStatus.OK);
+    }
 }

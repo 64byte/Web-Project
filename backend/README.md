@@ -66,6 +66,15 @@
 - app-batch (작성중)
   배치 서비스 패키지
 
+### 서비스 레이어
+  - [user](https://github.com/64byte/Web-Project/tree/main/backend/app-external-api/src/main/java/com/story/backend/user/service)
+  - [address](https://github.com/64byte/Web-Project/tree/main/backend/app-external-api/src/main/java/com/story/backend/address/service)
+  - [category](https://github.com/64byte/Web-Project/tree/main/backend/app-external-api/src/main/java/com/story/backend/category/service)
+  - [product](https://github.com/64byte/Web-Project/tree/main/backend/app-external-api/src/main/java/com/story/backend/product/service)
+  - [color](https://github.com/64byte/Web-Project/tree/main/backend/app-external-api/src/main/java/com/story/backend/color/service)
+  - [cart](https://github.com/64byte/Web-Project/tree/main/backend/app-external-api/src/main/java/com/story/backend/cart/service)
+  - [order](https://github.com/64byte/Web-Project/tree/main/backend/app-external-api/src/main/java/com/story/backend/order/service)
+  - [authentication](https://github.com/64byte/Web-Project/tree/main/backend/app-external-api/src/main/java/com/story/backend/authentication/service)
   
 ### Domain
 
