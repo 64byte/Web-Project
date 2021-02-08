@@ -20,9 +20,6 @@ public class PaymentResultRequest {
     @NotBlank
     private String merchantId;
 
-    @Min(0)
-    private long paidAmount;
-
     /**
      * merchantId format: cartId + "_" + timetamp
      * ex) 09fa4036-b86f-4fb6-89fa-edd051171594_1612172208745

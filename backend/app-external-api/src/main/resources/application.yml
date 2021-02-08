@@ -1,6 +1,10 @@
 server:
   port: 8080
 
+  error:
+    whitelabel:
+      enabled: false
+
 spring:
   flyway:
     enabled: false
@@ -23,3 +27,9 @@ app:
     jwt:
       secret: 'fd4db9644040cb8231cf7fb727a7ff23a85b985da450c0c840976127c9c0adfe0ef9a4f7e88ce7a1585dd59cf78f0ea57535d6b1cd744c1ee62d726572f51432'
       term-of-expiration: 3600000
+
+  payment:
+    iamport:
+      api-endpoint: 'https://api.iamport.kr/'
+      api-key: 4665430056677346
+      api-secret: qSR4AND1qgAQCFR8lxS5ViIf8Vc06k0wdRBNEfO4vpV85Mgqk8wfreuzaGAg1ANfrp26ERb9h6imTyMd

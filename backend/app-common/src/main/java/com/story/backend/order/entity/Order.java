@@ -27,6 +27,18 @@ public class Order {
     @Column(name = "order_number", nullable = false, updatable = false, unique = true)
     private String orderNumber;
 
+    @Column(name = "imp_uid", nullable = false, updatable = false, unique = true)
+    private String impUid;
+
+    @Column(name = "merchant_uid", nullable = false, updatable = false, unique = true)
+    private String merchantUid;
+
+    @Column(name = "pay_method", nullable = false, updatable = false)
+    private String payMethod;
+
+    @Column(name = "status", nullable = false, updatable = false)
+    private String status;
+
     @Column(name = "paid_amount", nullable = false)
     private long paidAmount;
 
@@ -40,5 +52,14 @@ public class Order {
     @CreatedDate
     @Column(name = "created_at")
     private LocalDateTime createdAt;
+
+    public Order(String impUid, String merchantUid, String payMethod, String status, long paidAmount, String applyNum) {
+        this.impUid = impUid;
+        this.merchantUid = merchantUid;
+        this.payMethod = payMethod;
+        this.status = status;
+        this.paidAmount = paidAmount;
+        this.applyNum = applyNum;
+    }
 
 }
