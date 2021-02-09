@@ -121,6 +121,14 @@
 
 - ~~작성 중~~
 
+### 로컬 개발 환경
+- 환경 구축
+> docker-compose up -d
+- 실행
+> ./gradlew app-external-api:bootrun
+- clean up
+> docker-compose down
+
 ### 코드 작성 관련
 
 - 도메인 중심 디렉토리 구성

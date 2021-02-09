@@ -53,9 +53,5 @@ public class asdasdaddadadadUserController {
     @GetMapping("/orders")
     public ResponseEntity<CommonResponse> getOrderListOfUser(@AuthenticationPrincipal UserDetails userDetails) {
         return new ResponseEntity<>(CommonResponse.builder().build(), HttpStatus.BAD_REQUEST);
-    }fddfdffdsfaasasd
-    fddfdffdsfaasasdasdkjlsdfjasdfljsdfj'safjasd'
-    fjsdj
-    sfdj
-            adsfjsdajasdf
+    }
 }

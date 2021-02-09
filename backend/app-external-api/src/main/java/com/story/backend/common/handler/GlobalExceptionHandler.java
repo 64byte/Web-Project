@@ -8,6 +8,7 @@ import com.story.backend.product.exception.NotFoundProductException;
 import com.story.backend.product.exception.NotFoundProductSkuException;
 import com.story.backend.user.exception.AlreadyRegisteredUserException;
 import com.story.backend.user.exception.UserBadCredentialsException;
+import javassist.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -61,6 +62,12 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(ErrorResponse.builder().build(), HttpStatus.BAD_REQUEST);
     }
     //
+
+    @ExceptionHandler(NotFoundException.class)
+    protected ResponseEntity<ErrorResponse> handleNotFoundException(Exception e) {
+        log.error("handleNotFoundException: ", e);
+        return new ResponseEntity<>(ErrorResponse.builder().build(), HttpStatus.NOT_FOUND);
+    }
 
     @ExceptionHandler(Exception.class)
     protected ResponseEntity<ErrorResponse> handleException(Exception e) {

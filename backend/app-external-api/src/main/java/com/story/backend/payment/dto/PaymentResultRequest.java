@@ -27,12 +27,13 @@ public class PaymentResultRequest {
      */
     public UUID parseCartIdFromMerchantId() {
         final int lengthOfSplitItems = 2;
+        final int cartIdIdx = 0;
 
         String[] cartIdAndTimestamp = merchantId.split("_");
         if (cartIdAndTimestamp.length != lengthOfSplitItems) {
             throw new RuntimeException();
         }
 
-        return UUID.fromString(cartIdAndTimestamp[0]);
+        return UUID.fromString(cartIdAndTimestamp[cartIdIdx]);
     }
 }
