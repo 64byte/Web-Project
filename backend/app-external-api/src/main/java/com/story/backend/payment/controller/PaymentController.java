@@ -22,6 +22,7 @@ public class PaymentController {
     @PostMapping("/results")
     public ResponseEntity<CommonResponse> returnPayment(@RequestBody PaymentResultRequest paymentResultRequest) {
         return new ResponseEntity<>(
-                CommonResponse.of(HttpStatus.CREATED.value(), null, paymentService.verifyPaymentAndGenerateOrder(paymentResultRequest)), HttpStatus.CREATED);
+                CommonResponse.of(HttpStatus.CREATED.value(), null,
+                        paymentService.verifyPaymentAndGenerateOrder(paymentResultRequest)), HttpStatus.CREATED);
     }
 }
