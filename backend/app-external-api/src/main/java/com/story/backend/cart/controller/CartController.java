@@ -37,4 +37,18 @@ public class CartController {
                 HttpStatus.CREATED);
     }
 
+    @DeleteMapping("/{cartId}")
+    public ResponseEntity<CommonResponse> emptyCartItems(@PathVariable UUID cartId) {
+        return new ResponseEntity<>(CommonResponse.of(
+                HttpStatus.OK.value(), null, cartService.emptyCartItems(cartId)), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{cartId}/{productSkuId}")
+    public ResponseEntity<CommonResponse> removeCartItem(@PathVariable UUID cartId, @PathVariable UUID productSkuId) {
+        return new ResponseEntity<>(
+                CommonResponse.of(HttpStatus.OK.value(),
+                        null,
+                        cartService.removeCartItemByCartIdAndProductSkuId(cartId, productSkuId)), HttpStatus.OK);
+    }
+
 }

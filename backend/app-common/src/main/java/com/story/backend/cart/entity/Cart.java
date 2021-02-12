@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.story.backend.address.entity.Address;
 import com.story.backend.user.entity.User;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Formula;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -35,8 +36,8 @@ public class Cart {
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
 
-    @Formula("(select sum(ci.quantity) from cart_item ci where ci.cart_id = id)")
-    private long totalQuantity;
+    @Formula("COALESCE((select sum(ci.quantity) from cart_item ci where ci.cart_id = id), 0)")
+    private long totalQuantity = 0;
 //
 //    private long totalPrice;
 
@@ -49,12 +50,22 @@ public class Cart {
     private LocalDateTime createdAt;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "cart", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "cart", fetch = FetchType.EAGER, orphanRemoval = true)
     private final Set<CartItem> cartItems = new HashSet<>();
 
     @Builder
     public Cart() {
 
+    }
+
+    public void addCartItem(CartItem cartItem) {
+        cartItems.add(cartItem);
+        cartItem.setCart(this);
+    }
+
+    public void remoteCartItem(CartItem cartItem) {
+        cartItems.remove(cartItem);
+        cartItem.setCart(null);
     }
 
 }

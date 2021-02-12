@@ -50,4 +50,17 @@ public class CartItemService {
         return true;
     }
 
+    public void remoteCartItemByCart(@Valid @NotNull Cart cart) {
+        List<CartItem> cartItems = cartItemRepository.findCartItemsByCartId(cart.getId());
+
+        cartItemRepository.deleteInBatch(cartItems);
+    }
+
+    public void removeCartItemByCartAndProductSku(@Valid @NotNull Cart cart, @Valid @NotNull ProductSku productSku) {
+        CartItem cartItem = cartItemRepository.findByCartIdAndProductSkuId(cart.getId(), productSku.getId())
+                .orElseThrow();
+
+        cartItemRepository.delete(cartItem);
+    }
+
 }

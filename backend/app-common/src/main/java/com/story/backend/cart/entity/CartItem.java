@@ -49,4 +49,8 @@ public class CartItem {
         this.quantity += quantity;
     }
 
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
 }
