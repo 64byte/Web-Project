@@ -8,9 +8,6 @@ public class IamportApiService {
 
     private final RestTemplate restTemplate;
 
-    private final static String GET_TOKEN_URL = "/users/getToken";
-    private final static String GET_PAYMENTS_INFO_URL = "/payments";
-
     public IamportApiService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }

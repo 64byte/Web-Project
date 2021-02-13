@@ -91,12 +91,24 @@ public class CartService {
     }
 
     @Transactional
-    public void emptyCartItems(@Valid @NotNull UUID cartId) {
+    public boolean emptyCartItems(@Valid @NotNull UUID cartId) {
         Cart cart = cartRepository.findByCartId(cartId)
                 .orElseThrow();
 
-        cart.getCartItems().clear();
+        cartItemService.remoteCartItemByCart(cart);
 
         cartRepository.save(cart);
+        return true;
+    }
+
+    public boolean removeCartItemByCartIdAndProductSkuId(@Valid @NotNull UUID cartId, @Valid @NotNull UUID productSkuId) {
+        Cart cart = cartRepository.findByCartId(cartId)
+                .orElseThrow();
+
+        ProductSku productSku = productSkuService.getProductSkuBySkuId(productSkuId)
+                .orElseThrow();
+
+        cartItemService.removeCartItemByCartAndProductSku(cart, productSku);
+        return true;
     }
 }
