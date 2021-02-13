@@ -43,7 +43,7 @@ public class CartController {
                 HttpStatus.OK.value(), null, cartService.emptyCartItems(cartId)), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{cartId}/{productSkuId}")
+    @DeleteMapping("/{cartId}/productSkus/{productSkuId}")
     public ResponseEntity<CommonResponse> removeCartItem(@PathVariable UUID cartId, @PathVariable UUID productSkuId) {
         return new ResponseEntity<>(
                 CommonResponse.of(HttpStatus.OK.value(),

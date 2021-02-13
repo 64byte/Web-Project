@@ -32,13 +32,14 @@ public class CartItemService {
     }
 
     /**
+     * 카트에 아이템을 추가합니다. (카트 아이템 튜플을 하나 추가)
+     * (cart, productSku)를 추가합니다, 이미 존재할 경우 수량을 1개 증가시킵니다.
      *
      * @param cart
      * @param productsku
      * @param quantity
      * @return
      */
-    @Transactional
     public boolean updateCartItem(@Valid @NotNull Cart cart, @Valid @NotNull ProductSku productsku, @Valid @Min(1) long quantity) {
 
         CartItem cartItem = cartItemRepository.findByCartIdAndProductSkuId(cart.getId(), productsku.getId())
@@ -50,12 +51,24 @@ public class CartItemService {
         return true;
     }
 
+    /**
+     * cartId와 일치하는 cartItem을 제거합니다. (카트 아이템을 비우는 것)
+     *
+     * @param cart
+     */
+    @Transactional
     public void remoteCartItemByCart(@Valid @NotNull Cart cart) {
         List<CartItem> cartItems = cartItemRepository.findCartItemsByCartId(cart.getId());
 
         cartItemRepository.deleteInBatch(cartItems);
     }
 
+    /**
+     * (cartId, productSkuId)와 일치하는 cartItem을 제거합니다. (수량 증감이 아닌 담겨있는 아이템을 제거)
+     *
+     * @param cart
+     * @param productSku
+     */
     public void removeCartItemByCartAndProductSku(@Valid @NotNull Cart cart, @Valid @NotNull ProductSku productSku) {
         CartItem cartItem = cartItemRepository.findByCartIdAndProductSkuId(cart.getId(), productSku.getId())
                 .orElseThrow();
