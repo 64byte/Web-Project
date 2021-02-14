@@ -21,7 +21,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/users")
-public class asdasdaddadadadUserController {
+public class UserController {
 
     private final UserService userService;
 
