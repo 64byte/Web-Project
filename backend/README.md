@@ -47,7 +47,7 @@
   - [cart](https://github.com/64byte/Web-Project/tree/main/backend/app-external-api/src/main/java/com/story/backend/cart/)
   - [order](https://github.com/64byte/Web-Project/tree/main/backend/app-external-api/src/main/java/com/story/backend/order/)
   - [authentication](https://github.com/64byte/Web-Project/tree/main/backend/app-external-api/src/main/java/com/story/backend/authentication/)
-  
+
 - app-internal-api (작성중)
   내부 api 패키지 (common, backoffice controller, service)
   - [user](https://github.com/64byte/Web-Project/tree/main/backend/app-internal-api/src/main/java/com/story/backend/user)
@@ -58,7 +58,6 @@
   - [~~cart~~](https://github.com/64byte/Web-Project/tree/main/backend/app-internal-api/src/main/java/com/story/backend/cart/)
   - [~~order~~](https://github.com/64byte/Web-Project/tree/main/backend/app-internal-api/src/main/java/com/story/backend/order/)
   - [~~authentication~~](https://github.com/64byte/Web-Project/tree/main/backend/app-internal-api/src/main/java/com/story/backend/authentication/)
-  
 
 - app-mail-server (작성중)
   ~~메세지 브로커~~ 로부터 메세지를 받아온 후에 처리하는 메일 전송 서버 (가입 완료 및 주문 완료)
@@ -67,6 +66,7 @@
   배치 서비스 패키지
 
 ### 서비스 레이어
+
   - [user](https://github.com/64byte/Web-Project/tree/main/backend/app-external-api/src/main/java/com/story/backend/user/service)
   - [address](https://github.com/64byte/Web-Project/tree/main/backend/app-external-api/src/main/java/com/story/backend/address/service)
   - [category](https://github.com/64byte/Web-Project/tree/main/backend/app-external-api/src/main/java/com/story/backend/category/service)
@@ -75,7 +75,7 @@
   - [cart](https://github.com/64byte/Web-Project/tree/main/backend/app-external-api/src/main/java/com/story/backend/cart/service)
   - [order](https://github.com/64byte/Web-Project/tree/main/backend/app-external-api/src/main/java/com/story/backend/order/service)
   - [authentication](https://github.com/64byte/Web-Project/tree/main/backend/app-external-api/src/main/java/com/story/backend/authentication/service)
-  
+
 ### Domain
 
 - user 
@@ -89,7 +89,16 @@
 - order
 - authentication
 
+
+
+### API spec
+
+![api](https://github.com/64byte/Web-Project/blob/main/backend/resource/api_spec.png)
+
+
+
 ## Database
+
 - [SCHEME](https://github.com/64byte/Web-Project/tree/main/backend/app-common/src/main/resources/db/migration)
 - 각 테이블은 phantom id (auto increment, 이하 id)와 UUID를 가진다.
   - id는 내부 로직에서 사용하는 PK, UUID는 외부에서 사용하는 PK이다. (N:M 병합 테이블의 경우에는 주로 다른 컨트롤러 혹은 서비스에 의해 접근하므로 id만 가진다)
@@ -107,6 +116,9 @@
   - order
     - 제품 주문 내용
 - ~~index 작성 중~~  
+- ![erd](https://github.com/64byte/Web-Project/blob/main/backend/resource/erd.png)
+
+
 
 ### Branch 전략
 
@@ -122,11 +134,17 @@
 - ~~작성 중~~
 
 ### 로컬 개발 환경
+
 - 환경 구축
+
 > docker-compose up -d
+
 - 실행
+
 > ./gradlew app-external-api:bootrun
+
 - clean up
+
 > docker-compose down
 
 ### 코드 작성 관련
@@ -153,10 +171,10 @@
     - 예외가 발생된 경우 반환되는 Response
 
 - Controller 예외는 한 곳에서 처리한다. (해당 아이디어는 [여기](https://github.com/cheese10yun/spring-guide/blob/master/docs/exception-guide.md) 를 참고했음)
+
   - app-external-api
     - [GlobalExceptionHandler](https://github.com/64byte/Web-Project/blob/main/backend/app-external-api/src/main/java/com/story/backend/common/handler/GlobalExceptionHandler.java)
 
 - Setter 사용 최소화 (@Data or class 단위의 @Setter 사용은 안하도록함)
+
   - 의도치 않은 변경을 최소화하기 위함. 필요하다면 필드 단위에서 Setter
-  
---------------------------------------------------------------------------------------------------------------------------------------------------
